@@ -1,0 +1,13 @@
+
+$theme-colors: (
+	"dark": #4b4339,
+
+	"cream": #f0d4af, 
+	"maple": #ac7147,
+	// "dark": #e3ae69, 
+	// "dark": #AC8759, 
+);
+
+@import "./App.css";
+@import "~bootstrap/scss/bootstrap";
+
