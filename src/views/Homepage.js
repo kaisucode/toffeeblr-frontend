@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import '../styles/Animations.scss';
+
+import CenteredDiv from '../components/CenteredDiv';
 import CredentialsForm from '../components/CredentialsForm';
 
 export default function Homepage() {
@@ -19,7 +23,7 @@ export default function Homepage() {
   function renderWelcome(){
     return (
       <Container>
-        <h1 class="display-3">Welcome to Toffeeblr!</h1>
+        <h1 className="display-3">Welcome to Toffeeblr!</h1>
         <br/><br/>
 
         <Row className="justify-content-lg-center">
@@ -40,12 +44,24 @@ export default function Homepage() {
   }
 
   return (
-    <div style={{ marginTop: "24vh" }}>
-      { displayWelcome
-        ? renderWelcome()
-        : <CredentialsForm isLogin={isLogin}/>
-      }
-    </div>
+    <CenteredDiv>
+
+      <SwitchTransition>
+        <CSSTransition
+          key={displayWelcome ? "login" : "signup"}
+          addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
+          classNames='slide-fade'
+        >
+
+          { displayWelcome
+            ? renderWelcome()
+            : <CredentialsForm isLogin={isLogin}/>
+          }
+
+        </CSSTransition>
+      </SwitchTransition>
+
+    </CenteredDiv>
   );
 }
 

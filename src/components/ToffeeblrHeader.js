@@ -33,7 +33,6 @@ export default function ToffeeblrHeader() {
             <Nav.Link href="#newpost">New Post</Nav.Link>
           </Nav>
         </Navbar.Collapse>
-        <br style={{color: "#4b4339" }}/>
       </Navbar>
     </div>
   );

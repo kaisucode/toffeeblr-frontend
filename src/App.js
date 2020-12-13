@@ -1,14 +1,20 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-
-import Homepage from './views/Homepage';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import './styles/App.scss';
+import './styles/Animations.scss';
 
 import { Container, Col, Row } from 'react-bootstrap';
 import ToffeeblrHeader from './components/ToffeeblrHeader';
-import './styles/App.scss';
+
+import Homepage from './views/Homepage';
+import Signup from './views/Signup';
+import Login from './views/Login';
 
 const routes = [
-  { path: '/', name: 'Home', Component: Homepage }
+  { path: '/', name: 'Home', Component: Homepage },
+  { path: '/signup', name: 'Sign up', Component: Signup }, 
+  { path: '/login', name: 'Log in', Component: Login }
 ]
 
 function App() {
@@ -22,7 +28,16 @@ function App() {
 
             {routes.map(({ path, Component }) => (
               <Route key={path} exact path={path}>
-                <Component />
+                {({ match }) => (
+                    <CSSTransition
+                      in={match != null}
+                      timeout={300}
+                      classNames='magnify'
+                      unmountOnExit
+                    >
+                      <Component />
+                    </CSSTransition>
+                )}
               </Route>
             ))}
 

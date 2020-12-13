@@ -1,10 +1,17 @@
 import React from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 export default function CredentialsForm(props) {
   return (
     <Container>
+      { props.isLogin
+        ? <h1 className="display-4">Log in to your account</h1>
+        : <h1 className="display-4">Sign up for Toffeeblr</h1>
+      }
+
+      <br/>
+
       <Form>
         <Row className="justify-content-md-center">
           <Col md={{ span: 4, offset: 0 }}>
