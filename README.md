@@ -5,19 +5,17 @@ Toffeeblr
 Made with React and React Bootstrap
 
 ## TODO
-- [ ] React router setup
+- [x] React router setup
 - [ ] Login view
 - [ ] Signup view
 - [ ] Redux setup
+- [ ] Page transition animations
 
-
-## Views
-- Login / signup
-- Feed with lazy loading
-- Search 
-- Write a post
-- Likes / posts / reblogs / follow list / settings
-- Messaging?? 
+- [ ] New post
+- [ ] Account ( Likes / posts / reblogs / follow list / settings )
+- [ ] Lazy loading feed
+- [ ] Searchbar
+- [ ] Messaging??
 
 
 ## Available Scripts

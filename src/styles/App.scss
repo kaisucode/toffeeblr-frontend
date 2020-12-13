@@ -1,12 +1,32 @@
 
-$theme-colors: (
-	"dark": #4b4339,
+$maple: #ac7147;
+$brown: #6C4B34;
+$cream: #f0d4af;
+$grey: #4b4339;
 
-	"cream": #f0d4af, 
-	"maple": #ac7147,
-	// "dark": #e3ae69, 
-	// "dark": #AC8759, 
+$coffee: #C5A680;
+$gold: #AC8759;
+$mahogany: #BF675A;
+// $: #e3ae69;
+
+$babyblue: #ACDADD;
+
+$theme-colors: (
+	"primary": $maple,
+	"secondary": $brown,
+	"success": $babyblue,
+	"light": $cream,
+	"dark": $grey,
 );
+
+$white: $cream;
+$black: $grey;
+
+$body-color: $cream;
+$body-bg: $grey;
+
+// $link-hover-decoration: none;
+// $hr-border-color: #000;
 
 @import "./App.css";
 @import "~bootstrap/scss/bootstrap";
