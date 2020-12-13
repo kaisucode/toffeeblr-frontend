@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 
 import Homepage from './views/Homepage';
-import Login from './views/Login';
-import Signup from './views/Signup';
 
-import { Container, Button, Col, Row } from 'react-bootstrap';
+import { Container, Col, Row } from 'react-bootstrap';
 import ToffeeblrHeader from './components/ToffeeblrHeader';
 import './styles/App.scss';
+
+const routes = [
+  { path: '/', name: 'Home', Component: Homepage }
+]
 
 function App() {
   return (
@@ -18,9 +20,11 @@ function App() {
         <Row className="row">
           <Col xs={12}>
 
-            <Route exact path="/" component={Homepage} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/signup" component={Signup} />
+            {routes.map(({ path, Component }) => (
+              <Route key={path} exact path={path}>
+                <Component />
+              </Route>
+            ))}
 
           </Col>
         </Row>

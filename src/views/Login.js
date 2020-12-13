@@ -1,12 +1,6 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import { 
-  Form, 
-  Button, 
-  Container, 
-  Row, 
-  Col 
-} from 'react-bootstrap';
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 export default function Login() {
   return (
