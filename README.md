@@ -6,10 +6,10 @@ Made with React and React Bootstrap
 
 ## TODO
 - [x] React router setup
-- [ ] Login view
-- [ ] Signup view
+- [ ] Login / Signup view cleanup
+- [ ] Login / Signup functionality
 - [ ] Redux setup
-- [ ] Page transition animations
+- [ ] Page transition animations with [react-transition-group](https://reactcommunity.org/react-transition-group/)
 
 - [ ] New post
 - [ ] Account ( Likes / posts / reblogs / follow list / settings )

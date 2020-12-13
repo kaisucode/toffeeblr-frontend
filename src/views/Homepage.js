@@ -10,8 +10,8 @@ import {
 
 export default function Homepage() {
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "60vh", width: "100%" }}>
-      <Container>
+    <div>
+      <Container style={{ marginTop: "24vh" }}>
         <h1 class="display-3">Welcome to Toffeeblr!</h1>
         <br/><br/>
 

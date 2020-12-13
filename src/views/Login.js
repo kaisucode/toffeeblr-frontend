@@ -10,9 +10,9 @@ import {
 
 export default function Login() {
   return (
-    <div style={{ display: "flex", alignItems: "center", justifyContent: "center", height: "70vh", width: "100%" }}>
-      <Container>
+    <div>
 
+      <Container style={{ marginTop: "24vh" }}>
         <Form>
           <Row className="justify-content-md-center">
             <Col md={{ span: 4, offset: 0 }}>
