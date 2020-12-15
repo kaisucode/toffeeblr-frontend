@@ -21,40 +21,33 @@ function App() {
   return (
     <div className="App">
 
-      {
-
-        // <Switch>
-        //   <Route exact path="/login" render={() => (<ToffeeblrHeader isLogin={true} />)}></Route>
-        //   <Route exact path="/signup" render={() => (<ToffeeblrHeader isLogin={false} />)}></Route>
-        //   <Route exact path="/" render={() => (<ToffeeblrHeader emptyHeader={true} />)}></Route>
-        //   <Route path="/" render={() => (<ToffeeblrHeader displayUserOptions={true} />)}></Route>
-        // </Switch>
-      }
+      <Switch>
+        <Route exact path="/login" render={() => (<ToffeeblrHeader isLogin={true} />)}></Route>
+        <Route exact path="/signup" render={() => (<ToffeeblrHeader isLogin={false} />)}></Route>
+        <Route exact path="/" render={() => (<ToffeeblrHeader emptyHeader={true} />)}></Route>
+        <Route path="/" render={() => (<ToffeeblrHeader displayUserOptions={true} />)}></Route>
+      </Switch>
 
 
-      <Container>
-        <Row className="row">
-          <Col xs={12}>
-            {routes.map(({ path, Component, ExitAnimation }) => (
-              <Route key={path} exact path={path}>
-                {({ match }) => (
-                    <CSSTransition
-                      in={match != null}
-                      timeout={300}
-                      classNames={ExitAnimation}
-                      unmountOnExit
-                    >
-                      <Component />
-                    </CSSTransition>
-                )}
-              </Route>
-            ))}
-          </Col>
-        </Row>
+      <Container> <Row className="row">
+        <Col xs={12}>
+          {routes.map(({ path, Component, ExitAnimation }) => (
+            <Route key={path} exact path={path}>
+              {({ match }) => (
+                <CSSTransition
+                  in={match != null}
+                  timeout={300}
+                  classNames='slide-left'
+                  unmountOnExit
+                >
+                  <Component />
+                </CSSTransition>
+              )}
+            </Route>
+          ))}
+        </Col>
+      </Row>
       </Container>
-
-      {
-      }
 
     </div>
   );
