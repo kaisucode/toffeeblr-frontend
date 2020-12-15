@@ -1,71 +1,123 @@
 
+// // --------------
+// // Fade
+
+// .fade-enter{
+//    opacity: 0;
+// }
+// .fade-exit{
+//    opacity: 1;
+// }
+// .fade-enter-active{
+//    opacity: 1;
+// }
+// .fade-exit-active{
+//    opacity: 0;
+// }
+// .fade-enter-active,
+// .fade-exit-active{
+//    transition: opacity 500ms;
+// }
+
+
+// // --------------
+// // Slide & Fade
+
+// .slide-fade-enter {
+//   opacity: 0;
+//   transform: translateX(100%);
+// }
+// .slide-fade-enter-active {
+//   opacity: 1;
+//   transform: translateX(0%);
+// }
+// .slide-fade-exit {
+//   opacity: 1;
+//   transform: translateX(0%);
+// }
+// .slide-fade-exit-active {
+//   opacity: 0;
+//   transform: translateX(-100%);
+// }
+// .slide-fade-enter-active,
+// .slide-fade-exit-active {
+//   transition: opacity 500ms, transform 500ms;
+// }
+
+
 // --------------
-// Fade
+// slide-right
 
-.fade-enter{
-	 opacity: 0;
-}
-.fade-exit{
-	 opacity: 1;
-}
-.fade-enter-active{
-	 opacity: 1;
-}
-.fade-exit-active{
-	 opacity: 0;
-}
-.fade-enter-active,
-.fade-exit-active{
-	 transition: opacity 500ms;
-}
-
-
-// --------------
-// Slide & Fade
-
-.slide-fade-enter {
+.slide-right-enter {
   opacity: 0;
-  transform: translateX(100%);
+	transform: translateX(-100%);
 }
-.slide-fade-enter-active {
+
+.slide-right-enter-active {
+  opacity: 1;
+	transform: translateX(0%);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.slide-right-exit {
   opacity: 1;
   transform: translateX(0%);
 }
-.slide-fade-exit {
-  opacity: 1;
-  transform: translateX(0%);
-}
-.slide-fade-exit-active {
+
+.slide-right-exit-active {
   opacity: 0;
-  transform: translateX(-100%);
-}
-.slide-fade-enter-active,
-.slide-fade-exit-active {
+	transform: translateX(100%);
   transition: opacity 500ms, transform 500ms;
 }
 
 
 // --------------
-// Magnify
+// slide-left
+
+.slide-left-enter {
+  opacity: 0;
+  transform: translateX(100%);
+}
+
+.slide-left-enter-active {
+  opacity: 1;
+	transform: translateX(0%);
+  transition: opacity 500ms, transform 500ms;
+}
+
+.slide-left-exit {
+  opacity: 1;
+  transform: translateX(0%);
+}
+
+.slide-left-exit-active {
+  opacity: 0;
+  transform: translateX(-100%);
+  transition: opacity 500ms, transform 500ms;
+}
+
+// --------------
+// magnify
  
 .magnify-enter {
-  opacity: 0;
-  transform: scale(1.1);
+	opacity: 0;
+	transform: scale(1.1);
 }
 
 .magnify-enter-active {
-  opacity: 1;
-  transform: scale(1);
-  transition: opacity 300ms, transform 300ms;
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 300ms, transform 300ms;
 }
 
 .magnify-exit {
-  opacity: 1;
-  transform: scale(1);
+	opacity: 1;
+	transform: scale(1);
 }
 
 .magnify-exit-active {
-  opacity: 0;
-  transform: scale(0.9);
-  transition: opacity 300ms, transform 300ms;
+	opacity: 0;
+	transform: scale(0.9);
+	transition: opacity 300ms, transform 300ms;
 }
+

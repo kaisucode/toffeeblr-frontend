@@ -8,8 +8,10 @@ Made with React and React Bootstrap
 - [x] React router setup
 - [x] Login / Signup view cleanup
 - [x] Page transition animations with [react-transition-group](https://reactcommunity.org/react-transition-group/)
-- [ ] Login / Signup functionality
-- [ ] Redux setup
+- [x] Redux setup
+- [ ] Use redux info to render Navbar (display details or just the login button)
+- [ ] Login / Signup functionality (they should be hooks instead)
+- [ ] APIs
 
 - [ ] New post
 - [ ] Account ( Likes / posts / reblogs / follow list / settings )
@@ -17,6 +19,9 @@ Made with React and React Bootstrap
 - [ ] Searchbar
 - [ ] Messaging??
 
+## Redux should store
+- username & token
+- number of likes, posts, followers, followings
 
 ## Available Scripts
 
