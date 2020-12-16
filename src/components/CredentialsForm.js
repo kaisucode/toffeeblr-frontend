@@ -6,32 +6,33 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import * as Network from '../api/Network';
 
 export default function CredentialsForm(props) {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+  const [signUpSuccess, setSignUpSuccess] = useState(false);
 
   const bannerText = props.isLogin ? "Log in to your account" : "Sign up for Toffeeblr";
   const buttonText = props.isLogin ? "Log In" : "Sign Up";
 
-  const dispatch = useDispatch();
-
-
   function processInfo(){
     const data = {username: username, password: password}
-    // useSignup(data); 
     // check for promise error, if success then reroute, otherwise show popup error message
-    console.log("processing info: ");
     if (props.isLogin){
       Network.Login(data);
     }
     else{
       dispatch(Network.Signup(data))
         .then(unwrapResult)
-        .then(aUsername => {
-          console.log("Promise returned: " + aUsername);
+        .then(result => {
+          console.log("Promise returned: ");
+          console.log(JSON.stringify(unwrapResult(result)));
           // get redirect link from redux and render that
+          setSignUpSuccess(false);
         })
         .catch(e => {
           console.log("Promise errored: " + JSON.stringify(e));
+          setSignUpSuccess(true);
         });
     }
   }
@@ -40,6 +41,10 @@ export default function CredentialsForm(props) {
     <Container>
       <h1 className="display-4">{bannerText}</h1>
       <br/>
+
+      {signUpSuccess && 
+      <h1 className="display-1">SIGN UP WORKED!!! AYYYYOOOOOO</h1>
+      }
 
       <Form>
         <Row className="justify-content-md-center">

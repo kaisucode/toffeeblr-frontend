@@ -30,14 +30,18 @@ const fakeAxiosFunc = () => {
 };
 
 export const Signup = createAsyncThunk(
-  'counter/setStoredUsernameThunk', 
+  'network/setStoredUsernameThunk', 
   async (userData, { dispatch, rejectWithValue }) => {
+
+    // postRequest("users/", { user: userData })
     fakeAxiosFunc().then((res) => {
       console.log("then: " + JSON.stringify(res));
-      dispatch(setStoredUsername(res.message));
+      dispatch(setStoredUsername(userData.username));
+
+      // dispatch(setStoredUsername(res.message));
       // store username & token in redux 
       // set up redirect info and status for render
-      return res.message;
+      return;
     }, (err) => {
       console.log("error: " + JSON.stringify(err));
       return rejectWithValue(err.message);
