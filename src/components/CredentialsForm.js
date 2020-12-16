@@ -24,7 +24,7 @@ export default function CredentialsForm(props) {
       Network.Login(data);
     }
     else{
-      dispatch(Network.Signup2(data))
+      dispatch(Network.Signup(data))
         .then(unwrapResult)
         .then(aUsername => {
           console.log("Promise returned: " + aUsername);
