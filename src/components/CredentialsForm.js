@@ -1,39 +1,34 @@
 import React, { useState } from 'react';
-// import { NavLink } from 'react-router-dom';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
-import * as Network from '../api/Network';
+import { selectSignupStatus } from 'store/slices/userDataSlice';
+import * as Network from 'api/Network';
+
+import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 export default function CredentialsForm(props) {
   const dispatch = useDispatch();
+  const signUpStatus = useSelector(selectSignupStatus);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [signUpSuccess, setSignUpSuccess] = useState(false);
 
   const bannerText = props.isLogin ? "Log in to your account" : "Sign up for Toffeeblr";
   const buttonText = props.isLogin ? "Log In" : "Sign Up";
 
   function processInfo(){
+
+    if (username.length > 20 || username === "" || password.length > 20 || password.length < 3){
+      console.log("incorrect lengths");
+      return;
+    }
+
     const data = {username: username, password: password}
-    // check for promise error, if success then reroute, otherwise show popup error message
     if (props.isLogin){
       Network.Login(data);
     }
     else{
-      dispatch(Network.Signup(data))
-        .then(unwrapResult)
-        .then(result => {
-          console.log("Promise returned: ");
-          console.log(JSON.stringify(unwrapResult(result)));
-          // get redirect link from redux and render that
-          setSignUpSuccess(false);
-        })
-        .catch(e => {
-          console.log("Promise errored: " + JSON.stringify(e));
-          setSignUpSuccess(true);
-        });
+      dispatch(Network.Signup(data));
     }
   }
 
@@ -42,8 +37,8 @@ export default function CredentialsForm(props) {
       <h1 className="display-4">{bannerText}</h1>
       <br/>
 
-      {signUpSuccess && 
-      <h1 className="display-1">SIGN UP WORKED!!! AYYYYOOOOOO</h1>
+      { (signUpStatus === 2) && 
+        <h1 className="display-1">Username already exists</h1>
       }
 
       <Form>

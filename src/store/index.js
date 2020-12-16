@@ -1,11 +1,11 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
-import networkReducer from './userdata/userdataSlice';
+import userDataReducer from './slices/userDataSlice';
 
 export default configureStore({
   reducer: {
-    network: networkReducer,
+    userData: userDataReducer,
   }
 });
 
