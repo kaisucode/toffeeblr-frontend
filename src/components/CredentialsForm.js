@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+// import { NavLink } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-
+import { useDispatch } from 'react-redux';
+import { unwrapResult } from '@reduxjs/toolkit';
 import * as Network from '../api/Network';
-
-import { useSelector, useDispatch } from 'react-redux';
-import { setStoredUsername, selectUserdata } from '../store/userdata/userdataSlice';
 
 export default function CredentialsForm(props) {
   const [username, setUsername] = useState("");
@@ -15,11 +13,27 @@ export default function CredentialsForm(props) {
   const buttonText = props.isLogin ? "Log In" : "Sign Up";
 
   const dispatch = useDispatch();
-  const userdata = useSelector(selectUserdata);
+
 
   function processInfo(){
-    Network.Login(username, password);
-    dispatch(setStoredUsername(username));
+    const data = {username: username, password: password}
+    // useSignup(data); 
+    // check for promise error, if success then reroute, otherwise show popup error message
+    console.log("processing info: ");
+    if (props.isLogin){
+      Network.Login(data);
+    }
+    else{
+      dispatch(Network.Signup2(data))
+        .then(unwrapResult)
+        .then(aUsername => {
+          console.log("Promise returned: " + aUsername);
+          // get redirect link from redux and render that
+        })
+        .catch(e => {
+          console.log("Promise errored: " + JSON.stringify(e));
+        });
+    }
   }
 
   return (

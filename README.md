@@ -9,7 +9,7 @@ Made with React and React Bootstrap
 - [x] Login / Signup view cleanup
 - [x] Page transition animations with [react-transition-group](https://reactcommunity.org/react-transition-group/)
 - [x] Redux setup
-- [ ] Use redux info to render Navbar (display details or just the login button)
+- [x] Use redux info to render Navbar (display details or just the login button)
 - [ ] Login / Signup functionality (they should be hooks instead)
 - [ ] APIs
 
@@ -18,6 +18,8 @@ Made with React and React Bootstrap
 - [ ] Lazy loading feed
 - [ ] Searchbar
 - [ ] Messaging??
+
+- [ ] Switch ovr to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
 
 ## Redux should store
 - username & token

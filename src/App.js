@@ -37,7 +37,7 @@ function App() {
                 <CSSTransition
                   in={match != null}
                   timeout={300}
-                  classNames='slide-left'
+                  classNames={ExitAnimation}
                   unmountOnExit
                 >
                   <Component />
