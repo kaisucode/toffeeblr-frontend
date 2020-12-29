@@ -5,30 +5,26 @@ import { selectUsername } from 'store/slices/userDataSlice';
 import * as Network from 'api/Network';
 import './NewPost.scss';
 
-export default function NewPost(){
+export default function NewPost(props){
   const dispatch = useDispatch();
   const username = useSelector(selectUsername);
 
-  const [modalShow, setModalShow] = useState(true);
   const [postTitle, setPostTitle] = useState("");
   const [postContent, setPostContent] = useState("");
 
   function makePost(){
     var data = { title: postTitle, content: postContent }
     dispatch(Network.MakePost(data));
-    setModalShow(false);
+    props.onHide();
     setPostTitle("");
     setPostContent("");
   }
 
   return (
     <React.Fragment>
-      <Button variant="primary" onClick={() => setModalShow(true)}>
-        Launch vertically centered modal
-      </Button>
 
       <Modal
-        show={modalShow}
+        show={props.modalShow}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         backdrop="static"
@@ -64,7 +60,7 @@ export default function NewPost(){
             <h5>Tags: </h5>
           </Modal.Body>
           <Modal.Footer className="d-flex justify-content-between modalFooter">
-            <Button variant="dark" onClick={() => setModalShow(false)}>Close</Button>
+            <Button variant="dark" onClick={props.onHide}>Close</Button>
             <Button onClick={makePost}>Post</Button>
           </Modal.Footer>
         </Form>

@@ -11,7 +11,7 @@ Made with React and React Bootstrap
 - [x] Redux setup
 - [x] Use redux info to render Navbar (display details or just the login button)
 - [x] Login / Signup functionality (they should be hooks instead)
-- [x] APIs
+- [x] Network APIs (async thunks)
 
 - [ ] New post
 - [ ] Account ( Likes / posts / reblogs / follow list / settings )
@@ -20,9 +20,10 @@ Made with React and React Bootstrap
 - [ ] Messaging??
 - [ ] Add is-valids to forms
 
-- [ ] Apply login on signup
+- [x] Apply login on signup
+- [x] Auth state numbers
 - [ ] TextArea stretch container instead of displaying a scrollbar 
-- [ ] Switch ovr to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
+- [ ] Switch over to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
 
 ## Redux should store
 - username & token
@@ -35,7 +36,7 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:8123](http://localhost:8123) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.

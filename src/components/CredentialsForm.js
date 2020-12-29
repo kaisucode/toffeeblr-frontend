@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { selectStatus, selectSignupStatus, selectLoginStatus } from 'store/slices/userDataSlice';
+import { selectStatus, selectAuthState } from 'store/slices/userDataSlice';
+import { Redirect } from "react-router-dom";
+
 import * as Network from 'api/Network';
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
@@ -9,6 +11,7 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 export default function CredentialsForm(props) {
   const dispatch = useDispatch();
   const status = useSelector(selectStatus);
+  const authState = useSelector(selectAuthState);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -33,10 +36,10 @@ export default function CredentialsForm(props) {
       return "Username already exists";
     }
     else if (status === 200){
-      if (props.isLogin){
-        return "Login Successful!!";
+      if (authState === 1){
+        return (<Redirect to={'/feed'} />);
       }
-      else{
+      else if (authState === 0 && !props.isLogin){
         return "Signup Successful!!";
       }
     }

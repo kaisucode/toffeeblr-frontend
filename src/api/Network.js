@@ -18,26 +18,6 @@ export const getRequest = async (resource) => {
   return res;
 }
 
-export const Signup = createAsyncThunk(
-  'userData/signupThunk', 
-  async (userData, { dispatch, rejectWithValue }) => {
-
-    postRequest("users/", { user: userData }).then((res) => {
-      dispatch(setUsername(userData.username));
-      dispatch(setStatus(200));
-
-      // Do login here
-      // store token in redux 
-      // set up redirect info and status for render
-      return;
-    }, (err) => {
-      console.log("error in Network.Signup: " + JSON.stringify(err));
-      dispatch(setStatus(err.response.status));
-      return rejectWithValue(err.message);
-    });
-  }
-);
-
 export const Login = createAsyncThunk(
   'userData/loginThunk', 
   async (userData, { dispatch, rejectWithValue }) => {
@@ -46,6 +26,21 @@ export const Login = createAsyncThunk(
       dispatch(setToken(res.token));
       dispatch(setUsername(res.username));
       dispatch(setStatus(200));
+      return;
+    }, (err) => {
+      console.log("error in Network.Login: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
+      return rejectWithValue(err.message);
+    });
+  }
+);
+
+export const Signup = createAsyncThunk(
+  'userData/signupThunk', 
+  async (userData, { dispatch, rejectWithValue }) => {
+
+    postRequest("users/", { user: userData }).then((res) => {
+      dispatch(Login(userData));
       return;
     }, (err) => {
       console.log("error in Network.Signup: " + JSON.stringify(err));

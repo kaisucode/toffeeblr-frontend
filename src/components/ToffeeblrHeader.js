@@ -1,32 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown, 
-  Form, FormControl,
-  Container, Button 
+  Form, FormControl, Button 
 } from 'react-bootstrap';
+import NewPost from 'components/NewPost';
 
 export default function ToffeeblrHeader(props) {
-  // <Nav.Link href="/signup">Sign Up</Nav.Link>
+  const [modalShow, setModalShow] = useState(false);
 
-  function renderLoginButton(){
+  function renderOtherButton(){
+    var link, text;
+    if (props.isLogin) {
+      link = "/signup";
+      text = "Sign Up";
+    }
+    else{
+      link = "/login";
+      text = "Log In";
+    }
     return (
       <Nav className="ml-auto">
-        <NavLink to="/login">
+        <NavLink to={ link }>
             <Button variant="primary" block>
-              Log In
-            </Button>
-          </NavLink>
-      </Nav>
-    );
-  }
-
-  function renderSignupButton(){
-    return (
-      <Nav className="ml-auto">
-        <NavLink to="/signup">
-            <Button variant="primary" block>
-              Sign Up
+              { text }
             </Button>
           </NavLink>
       </Nav>
@@ -48,38 +45,32 @@ export default function ToffeeblrHeader(props) {
           <NavDropdown.Item href="#action/3.3">Posts</NavDropdown.Item>
           <NavDropdown.Item href="#action/3.4">Followers</NavDropdown.Item>
         </NavDropdown>
-        <Nav.Link href="#newpost">New Post</Nav.Link>
+        <Nav.Link onClick={() => setModalShow(true)}>New Post</Nav.Link>
       </Nav>
     );
   }
 
-  function renderNavBarContent(){
-    if (props.displayUserOptions){
-      return renderUserOptions();
-    }
-    else if (props.isLogin){
-      return renderSignupButton();
-    }
-    else{
-      return renderLoginButton();
-    }
-  }
-
   return (
-    <div className="border-bottom border-light">
-      <Navbar collapseOnSelect className="mx-5 my-1" variant="dark" expand="lg">
+    <React.Fragment>
+      <div className="border-bottom border-light">
+        <Navbar collapseOnSelect className="mx-5 my-1" variant="dark" expand="lg">
 
-        <Navbar.Brand href="/">Toffeeblr</Navbar.Brand>
-        <Form inline>
-          <FormControl type="text" placeholder="Search" className="ml-2" />
-        </Form>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+          <Navbar.Brand href="/">Toffeeblr</Navbar.Brand>
+          <Form inline>
+            <FormControl type="text" placeholder="Search" className="ml-2" />
+          </Form>
+          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
-        <Navbar.Collapse id="responsive-navbar-nav">
-          { props.emptyHeader || renderNavBarContent() }
-        </Navbar.Collapse>
-      </Navbar>
-    </div>
+          <Navbar.Collapse id="responsive-navbar-nav">
+            { props.emptyHeader || 
+                (props.displayUserOptions) ? renderUserOptions() : renderOtherButton()
+            }
+          </Navbar.Collapse>
+        </Navbar>
+      </div>
+
+      <NewPost modalShow={modalShow} onHide={() => setModalShow(false)}/>
+    </React.Fragment>
   );
 }
 
