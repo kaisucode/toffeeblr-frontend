@@ -10,8 +10,8 @@ Made with React and React Bootstrap
 - [x] Page transition animations with [react-transition-group](https://reactcommunity.org/react-transition-group/)
 - [x] Redux setup
 - [x] Use redux info to render Navbar (display details or just the login button)
-- [ ] Login / Signup functionality (they should be hooks instead)
-- [ ] APIs
+- [x] Login / Signup functionality (they should be hooks instead)
+- [x] APIs
 
 - [ ] New post
 - [ ] Account ( Likes / posts / reblogs / follow list / settings )

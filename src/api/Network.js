@@ -1,8 +1,15 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { setStoredUsername, signupUsernameExists, signupSuccess } from 'store/slices/userDataSlice';
+import { 
+  setUsername, 
+  setToken, 
+  signupUsernameExists, 
+  signupSuccess, 
+  loginSuccess,
+  loginFail 
+} from 'store/slices/userDataSlice';
 
-const url = "http://localhost:8123/";
+const url = "http://localhost:3000/";
 
 export const postRequest = async (resource, data) => {
   const res = await axios.post(url + resource, data);
@@ -15,11 +22,11 @@ export const getRequest = async (resource) => {
 }
 
 export const Signup = createAsyncThunk(
-  'userData/setStoredUsernameThunk', 
+  'userData/signupThunk', 
   async (userData, { dispatch, rejectWithValue }) => {
 
     postRequest("users/", { user: userData }).then((res) => {
-      dispatch(setStoredUsername(userData.username));
+      dispatch(setUsername(userData.username));
       dispatch(signupSuccess());
 
       // Do login here
@@ -27,8 +34,7 @@ export const Signup = createAsyncThunk(
       // set up redirect info and status for render
       return;
     }, (err) => {
-      if (err.message === "Request failed with status code 422"){
-        console.log("Username creation error");
+      if (err.response.status === 422){
         dispatch(signupUsernameExists());
       }
       else{
@@ -39,9 +45,29 @@ export const Signup = createAsyncThunk(
   }
 );
 
-export const Login = (userData) => {
-  console.log("login parameter here: " + userData.username);
-}
+export const Login = createAsyncThunk(
+  'userData/loginThunk', 
+  async (userData, { dispatch, rejectWithValue }) => {
+
+    postRequest("auth/login/", userData).then((res) => {
+      dispatch(setToken(res.token));
+      dispatch(setUsername(res.username));
+      dispatch(loginSuccess());
+      return;
+    }, (err) => {
+      console.log(JSON.stringify(err));
+      console.log(err.response.status);
+      if (err.response.status === 401){
+        dispatch(loginFail());
+        console.log("login failed");
+      }
+      else{
+        console.log("error in Network.Signup: " + JSON.stringify(err));
+      }
+      return rejectWithValue(err.message);
+    });
+  }
+);
 
 // const fakeAxiosFunc = () => {
 //   const fakeAxiosPromise = new Promise((resolve, reject) => {

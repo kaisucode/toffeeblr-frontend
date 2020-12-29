@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { selectSignupStatus } from 'store/slices/userDataSlice';
+import { selectSignupStatus, selectLoginStatus } from 'store/slices/userDataSlice';
 import * as Network from 'api/Network';
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
@@ -9,15 +9,14 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 export default function CredentialsForm(props) {
   const dispatch = useDispatch();
   const signUpStatus = useSelector(selectSignupStatus);
+  const loginStatus = useSelector(selectLoginStatus);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
 
   const bannerText = props.isLogin ? "Log in to your account" : "Sign up for Toffeeblr";
   const buttonText = props.isLogin ? "Log In" : "Sign Up";
 
   function processInfo(){
-
     if (username.length > 20 || username === "" || password.length > 20 || password.length < 3){
       console.log("incorrect lengths");
       return;
@@ -25,10 +24,29 @@ export default function CredentialsForm(props) {
 
     const data = {username: username, password: password}
     if (props.isLogin){
-      Network.Login(data);
+      dispatch(Network.Login(data));
     }
     else{
       dispatch(Network.Signup(data));
+    }
+  }
+
+  function renderStatus(){
+    if (props.isLogin) {
+      if (loginStatus === 1){
+        return "Login Successful!!";
+      }
+      else if (loginStatus === 2){
+        return "Username or password incorrect";
+      }
+    }
+    else{
+      if (signUpStatus === 1){
+        return "Signup Successful!!";
+      }
+      else if (signUpStatus === 2){
+        return "Username already exists";
+      }
     }
   }
 
@@ -37,9 +55,7 @@ export default function CredentialsForm(props) {
       <h1 className="display-4">{bannerText}</h1>
       <br/>
 
-      { (signUpStatus === 2) && 
-        <h1 className="display-1">Username already exists</h1>
-      }
+      <h1 className="display-1">{renderStatus()}</h1>
 
       <Form>
         <Row className="justify-content-md-center">
