@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
-import { selectSignupStatus, selectLoginStatus } from 'store/slices/userDataSlice';
+import { selectStatus, selectSignupStatus, selectLoginStatus } from 'store/slices/userDataSlice';
 import * as Network from 'api/Network';
 
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 
 export default function CredentialsForm(props) {
   const dispatch = useDispatch();
-  const signUpStatus = useSelector(selectSignupStatus);
-  const loginStatus = useSelector(selectLoginStatus);
+  const status = useSelector(selectStatus);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,30 +21,23 @@ export default function CredentialsForm(props) {
       return;
     }
 
-    const data = {username: username, password: password}
-    if (props.isLogin){
-      dispatch(Network.Login(data));
-    }
-    else{
-      dispatch(Network.Signup(data));
-    }
+    const data = { username: username, password: password };
+    props.isLogin ? dispatch(Network.Login(data)) : dispatch(Network.Signup(data));
   }
 
   function renderStatus(){
-    if (props.isLogin) {
-      if (loginStatus === 1){
+    if (status === 401){
+      return "Username or password incorrect";
+    }
+    else if (status === 409){
+      return "Username already exists";
+    }
+    else if (status === 200){
+      if (props.isLogin){
         return "Login Successful!!";
       }
-      else if (loginStatus === 2){
-        return "Username or password incorrect";
-      }
-    }
-    else{
-      if (signUpStatus === 1){
+      else{
         return "Signup Successful!!";
-      }
-      else if (signUpStatus === 2){
-        return "Username already exists";
       }
     }
   }

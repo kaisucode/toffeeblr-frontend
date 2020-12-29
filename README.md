@@ -20,8 +20,9 @@ Made with React and React Bootstrap
 - [ ] Messaging??
 - [ ] Add is-valids to forms
 
+- [ ] Apply login on signup
+- [ ] TextArea stretch container instead of displaying a scrollbar 
 - [ ] Switch ovr to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
-- [x] TextArea stretch container instead of displaying a scrollbar 
 
 ## Redux should store
 - username & token

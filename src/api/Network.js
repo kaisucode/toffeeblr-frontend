@@ -3,10 +3,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { 
   setUsername, 
   setToken, 
-  signupUsernameExists, 
-  signupSuccess, 
-  loginSuccess,
-  loginFail 
+  setStatus
 } from 'store/slices/userDataSlice';
 
 const url = "http://localhost:3000/";
@@ -27,19 +24,15 @@ export const Signup = createAsyncThunk(
 
     postRequest("users/", { user: userData }).then((res) => {
       dispatch(setUsername(userData.username));
-      dispatch(signupSuccess());
+      dispatch(setStatus(200));
 
       // Do login here
       // store token in redux 
       // set up redirect info and status for render
       return;
     }, (err) => {
-      if (err.response.status === 422){
-        dispatch(signupUsernameExists());
-      }
-      else{
-        console.log("error in Network.Signup: " + JSON.stringify(err));
-      }
+      console.log("error in Network.Signup: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
       return rejectWithValue(err.message);
     });
   }
@@ -52,18 +45,11 @@ export const Login = createAsyncThunk(
     postRequest("auth/login/", userData).then((res) => {
       dispatch(setToken(res.token));
       dispatch(setUsername(res.username));
-      dispatch(loginSuccess());
+      dispatch(setStatus(200));
       return;
     }, (err) => {
-      console.log(JSON.stringify(err));
-      console.log(err.response.status);
-      if (err.response.status === 401){
-        dispatch(loginFail());
-        console.log("login failed");
-      }
-      else{
-        console.log("error in Network.Signup: " + JSON.stringify(err));
-      }
+      console.log("error in Network.Signup: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
       return rejectWithValue(err.message);
     });
   }
