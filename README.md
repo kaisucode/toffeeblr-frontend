@@ -18,8 +18,10 @@ Made with React and React Bootstrap
 - [ ] Lazy loading feed
 - [ ] Searchbar
 - [ ] Messaging??
+- [ ] Add is-valids to forms
 
 - [ ] Switch ovr to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
+- [x] TextArea stretch container instead of displaying a scrollbar 
 
 ## Redux should store
 - username & token

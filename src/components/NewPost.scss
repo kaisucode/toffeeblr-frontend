@@ -1,0 +1,23 @@
+@import "styles/Theme.scss";
+
+.modal-content{
+	color: map-get($theme-colors, "secondary");
+	padding: 0.8rem 1rem;
+}
+
+.postTitleInput{
+	font-weight: bold;
+	border: none;
+	font-size: 2.2em;
+	padding: 0.2rem 0.6rem;
+}
+
+.postContentInput{
+	border: none;
+	padding: 0.2rem 0.6rem;
+}
+
+.modalFooter{
+	padding: 0 0.6rem;
+}
+

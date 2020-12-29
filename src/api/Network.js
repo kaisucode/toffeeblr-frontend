@@ -69,18 +69,11 @@ export const Login = createAsyncThunk(
   }
 );
 
-// const fakeAxiosFunc = () => {
-//   const fakeAxiosPromise = new Promise((resolve, reject) => {
-//     const num = Math.floor(Math.random() * 2);
-//     if (num === 0){
-//       console.log("should succeed");
-//       resolve({message: "axios success!"});
-//     }
-//     else{
-//       console.log("should fail");
-//       reject({message: "axios error"});
-//     }
-//   });
-//   return fakeAxiosPromise;
-// };
+export const MakePost = createAsyncThunk(
+  'userData/makePostThunk', 
+  async (postData, { dispatch, rejectWithValue }) => {
+    console.log("posting data...");
+    console.log(JSON.stringify(postData));
+  }
+);
 

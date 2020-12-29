@@ -10,11 +10,13 @@ import ToffeeblrHeader from './components/ToffeeblrHeader';
 import Homepage from './views/Homepage';
 import Signup from './views/Signup';
 import Login from './views/Login';
+import Feed from './views/Feed';
 
 const routes = [
   { path: '/', name: 'Home', Component: Homepage, ExitAnimation: 'slide-left' },
   { path: '/signup', name: 'Sign up', Component: Signup, ExitAnimation: 'slide-left' }, 
-  { path: '/login', name: 'Log in', Component: Login, ExitAnimation: 'slide-left' }
+  { path: '/login', name: 'Log in', Component: Login, ExitAnimation: 'slide-left' },
+  { path: '/feed', name: 'Feed', Component: Feed, ExitAnimation: '' }
 ]
 
 function App() {

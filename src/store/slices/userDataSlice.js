@@ -9,7 +9,8 @@ export const slice = createSlice({
   initialState: {
     username: "no username",
     token: "",
-    signupStatus: 0
+    signupStatus: 0, 
+    loginStatus: 0
   },
   reducers: {
     signupUsernameExists: (state) => {
@@ -39,6 +40,7 @@ export const { signupUsernameExists, signupSuccess, loginSuccess, loginFail, set
 // the state. Selectors can also be defined inline where they're used instead of
 // in the slice file. For example: `useSelector((state) => state.counter.value)`
 export const selectUserData = state => state.userData;
+export const selectUsername = state => state.userData.username;
 export const selectSignupStatus = state => state.userData.signupStatus;
 export const selectLoginStatus = state => state.userData.loginStatus;
 
