@@ -10,7 +10,9 @@ export const slice = createSlice({
     username: "no username",
     token: "",
     status: 200, 
-    authState: 0
+    authState: 0, 
+    feedContent: [], 
+    exploreContent: [], 
   },
   reducers: {
     setUsername: (state, action) => {
@@ -25,11 +27,17 @@ export const slice = createSlice({
     }, 
     setAuthState: (state, action) => {
       state.authState = action.payload;
-    }
+    }, 
+    setFeedContent: (state, action) => {
+      state.feedContent = action.payload;
+    }, 
+    setExploreContent: (state, action) => {
+      state.exploreContent = action.payload;
+    }, 
   },
 });
 
-export const { setUsername, setToken, setStatus, setAuthState } = slice.actions;
+export const { setUsername, setToken, setStatus, setAuthState, setFeedContent, setExploreContent } = slice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -37,6 +45,8 @@ export const { setUsername, setToken, setStatus, setAuthState } = slice.actions;
 export const selectUsername = state => state.userData.username;
 export const selectStatus = state => state.userData.status;
 export const selectAuthState = state => state.userData.authState;
+export const selectFeedContent = state => state.userData.feedContent;
+export const selectExploreContent = state => state.userData.exploreContent;
 
 export default slice.reducer;
 

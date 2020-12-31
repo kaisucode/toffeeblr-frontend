@@ -11,13 +11,15 @@ import Homepage from './views/Homepage';
 import Signup from './views/Signup';
 import Login from './views/Login';
 import Feed from './views/Feed';
+import Explore from './views/Explore';
 
 const routes = [
   // { path: '/', name: 'Home', Component: Homepage, ExitAnimation: 'slide-left' },
   { path: '/', name: 'login', Component: Login, ExitAnimation: 'slide-left' },
   { path: '/signup', name: 'Sign up', Component: Signup, ExitAnimation: 'slide-left' }, 
   { path: '/login', name: 'Log in', Component: Login, ExitAnimation: 'slide-left' },
-  { path: '/feed', name: 'Feed', Component: Feed, ExitAnimation: '' }
+  { path: '/feed', name: 'Feed', Component: Feed, ExitAnimation: '' }, 
+  { path: '/explore', name: 'Explore', Component: Explore, ExitAnimation: '' }, 
 ]
 
 function App() {

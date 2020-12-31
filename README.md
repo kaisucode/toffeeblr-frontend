@@ -13,9 +13,9 @@ Made with React and React Bootstrap
 - [x] Login / Signup functionality (they should be hooks instead)
 - [x] Network APIs (async thunks)
 
-- [ ] PostCard component
-- [ ] Explore
-- [ ] Feed
+- [x] PostCard component
+- [x] Explore
+- [x] Feed
 - [ ] New post
 - [ ] View other blogs [router pass params](https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component)
 - [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list)
