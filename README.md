@@ -13,17 +13,25 @@ Made with React and React Bootstrap
 - [x] Login / Signup functionality (they should be hooks instead)
 - [x] Network APIs (async thunks)
 
+- [ ] PostCard component
+- [ ] Explore
+- [ ] Feed
 - [ ] New post
-- [ ] Account ( Likes / posts / reblogs / follow list / settings )
-- [ ] Lazy loading feed
-- [ ] Searchbar
-- [ ] Messaging??
-- [ ] Add is-valids to forms
+- [ ] View other blogs [router pass params](https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component)
+- [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list)
 
 - [x] Apply login on signup
 - [x] Auth state numbers
+- [ ] Rich text editor
+- [ ] Add is-valids to forms
+- [ ] "Discard this post?"
 - [ ] TextArea stretch container instead of displaying a scrollbar 
 - [ ] Switch over to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
+
+- [ ] Lazy loading / pagination requests
+- [ ] Searchbar
+- [ ] Notifications
+- [ ] Messaging??
 
 ## Redux should store
 - username & token

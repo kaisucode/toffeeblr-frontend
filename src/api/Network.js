@@ -23,8 +23,8 @@ export const Login = createAsyncThunk(
   async (userData, { dispatch, rejectWithValue }) => {
 
     postRequest("auth/login/", userData).then((res) => {
-      dispatch(setToken(res.token));
-      dispatch(setUsername(res.username));
+      dispatch(setToken(res.data.token));
+      dispatch(setUsername(res.data.username));
       dispatch(setStatus(200));
       return;
     }, (err) => {

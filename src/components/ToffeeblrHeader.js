@@ -63,7 +63,7 @@ export default function ToffeeblrHeader(props) {
 
           <Navbar.Collapse id="responsive-navbar-nav">
             { props.emptyHeader || 
-                (props.displayUserOptions) ? renderUserOptions() : renderOtherButton()
+                (props.displayUserOptions ? renderUserOptions() : renderOtherButton())
             }
           </Navbar.Collapse>
         </Navbar>

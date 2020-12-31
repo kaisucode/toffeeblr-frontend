@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Modal, Button, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectUsername } from 'store/slices/userDataSlice';
@@ -69,3 +70,13 @@ export default function NewPost(props){
     </React.Fragment>
   );
 }
+
+NewPost.propTypes = {
+  modalShow: PropTypes.bool.isRequired, 
+  onHide: PropTypes.func.isRequired
+};
+
+NewPost.defaultProps = {
+  modalShow: false
+};
+

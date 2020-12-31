@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { unwrapResult } from '@reduxjs/toolkit';
 import { selectStatus, selectAuthState } from 'store/slices/userDataSlice';
 import { Redirect } from "react-router-dom";
-
-import * as Network from 'api/Network';
-
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import * as Network from 'api/Network';
 
 export default function CredentialsForm(props) {
   const dispatch = useDispatch();
@@ -17,6 +15,14 @@ export default function CredentialsForm(props) {
 
   const bannerText = props.isLogin ? "Log in to your account" : "Sign up for Toffeeblr";
   const buttonText = props.isLogin ? "Log In" : "Sign Up";
+
+  // Auto login for development
+  useEffect(() => {
+    if (props.isLogin){
+      const data = { username: "kevin", password: "123456" };
+      dispatch(Network.Login(data));
+    }
+  }, []);
 
   function processInfo(){
     if (username.length > 20 || username === "" || password.length > 20 || password.length < 3){
