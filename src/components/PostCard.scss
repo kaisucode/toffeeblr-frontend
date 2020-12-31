@@ -6,3 +6,8 @@
 	text-align: left;
 	width: 30rem;
 }
+
+.link-color{
+	color: map-get($theme-colors, "secondary");
+}
+

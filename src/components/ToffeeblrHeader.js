@@ -33,8 +33,8 @@ export default function ToffeeblrHeader(props) {
   function renderUserOptions(){
     return (
       <Nav className="ml-auto">
-        <Nav.Link href="feed">Feed</Nav.Link>
-        <Nav.Link href="explore">Explore</Nav.Link>
+        <Nav.Link href="/feed">Feed</Nav.Link>
+        <Nav.Link href="/explore">Explore</Nav.Link>
         <Nav.Link href="#inbox">Inbox</Nav.Link>
         <Nav.Link href="#notifs">Notifs</Nav.Link>
         <NavDropdown title="Account" id="collasible-nav-dropdown">

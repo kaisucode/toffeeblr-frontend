@@ -12,17 +12,57 @@ import Signup from './views/Signup';
 import Login from './views/Login';
 import Feed from './views/Feed';
 import Explore from './views/Explore';
+import BlogProfile from './views/BlogProfile';
 
-const routes = [
+const exactRoutes = [
   // { path: '/', name: 'Home', Component: Homepage, ExitAnimation: 'slide-left' },
   { path: '/', name: 'login', Component: Login, ExitAnimation: 'slide-left' },
   { path: '/signup', name: 'Sign up', Component: Signup, ExitAnimation: 'slide-left' }, 
   { path: '/login', name: 'Log in', Component: Login, ExitAnimation: 'slide-left' },
   { path: '/feed', name: 'Feed', Component: Feed, ExitAnimation: '' }, 
   { path: '/explore', name: 'Explore', Component: Explore, ExitAnimation: '' }, 
+  { path: '/blog', name: 'Blog', Component: BlogProfile, ExitAnimation: '' }, 
+]
+
+const wildcardRoutes = [
+  { path: '/blog', name: 'Blog', Component: BlogProfile, ExitAnimation: '' }, 
 ]
 
 function App() {
+  function renderExactRoutes(){
+    return (exactRoutes.map(({ path, Component, ExitAnimation }) => (
+      <Route key={path} exact path={path}>
+        {({ match }) => (
+          <CSSTransition
+            in={match != null}
+            timeout={300}
+            classNames={ExitAnimation}
+            unmountOnExit
+          >
+            <Component />
+          </CSSTransition>
+        )}
+      </Route>
+    )));
+  }
+
+  function renderWildcardRoutes(){
+    return (wildcardRoutes.map(({ path, Component, ExitAnimation }) => (
+      <Route key={path} sensitive path={path}>
+        {({ match }) => (
+          <CSSTransition
+            in={match != null}
+            timeout={300}
+            classNames={ExitAnimation}
+            unmountOnExit
+          >
+            <Component />
+          </CSSTransition>
+        )}
+      </Route>
+    )));
+  }
+
   return (
     <div className="App">
 
@@ -33,25 +73,13 @@ function App() {
         <Route path="/" render={() => (<ToffeeblrHeader displayUserOptions={true} />)}></Route>
       </Switch>
 
-
-      <Container> <Row className="row">
-        <Col xs={12}>
-          {routes.map(({ path, Component, ExitAnimation }) => (
-            <Route key={path} exact path={path}>
-              {({ match }) => (
-                <CSSTransition
-                  in={match != null}
-                  timeout={300}
-                  classNames={ExitAnimation}
-                  unmountOnExit
-                >
-                  <Component />
-                </CSSTransition>
-              )}
-            </Route>
-          ))}
-        </Col>
-      </Row>
+      <Container> 
+        <Row className="row">
+          <Col xs={12}>
+            { renderExactRoutes() }
+            { renderWildcardRoutes() }
+          </Col>
+        </Row>
       </Container>
 
     </div>

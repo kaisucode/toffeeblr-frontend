@@ -9,7 +9,9 @@ export default function PostCard(props) {
     <Container>
       <Card className="card-style">
         <Card.Header as="h6">
-          { props.username }
+          <NavLink className="link-color" to={`/blog/${props.username}`}>
+            { props.username }
+          </NavLink>
         </Card.Header>
 
         <Card.Body>

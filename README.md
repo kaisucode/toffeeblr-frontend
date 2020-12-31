@@ -16,9 +16,10 @@ Made with React and React Bootstrap
 - [x] PostCard component
 - [x] Explore
 - [x] Feed
-- [ ] New post
-- [ ] View other blogs [router pass params](https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component)
-- [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list)
+- [x] New post
+- [x] View other blogs [router pass params](https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component)
+- [ ] Refresh on new post creation
+- [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list )
 
 - [x] Apply login on signup
 - [x] Auth state numbers
@@ -27,6 +28,7 @@ Made with React and React Bootstrap
 - [ ] "Discard this post?"
 - [ ] TextArea stretch container instead of displaying a scrollbar 
 - [ ] Switch over to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
+- [ ] Reroute pages that require token headers to home or login page
 
 - [ ] Lazy loading / pagination requests
 - [ ] Searchbar

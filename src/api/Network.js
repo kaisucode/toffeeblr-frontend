@@ -5,7 +5,6 @@ import {
   setToken, 
   setStatus, 
   setFeedContent, 
-  setExploreContent, 
 } from 'store/slices/userDataSlice';
 
 const url = "http://localhost:3000/";
@@ -63,17 +62,22 @@ export const Signup = createAsyncThunk(
 
 export const MakePost = createAsyncThunk(
   'userData/makePostThunk', 
-  async (postData, { dispatch, rejectWithValue }) => {
-    console.log("posting data...");
-    console.log(JSON.stringify(postData));
+  async (postData, { dispatch, getState, rejectWithValue }) => {
+
+    postRequest("posts/", { post: postData }).then((res) => {
+      console.log(JSON.stringify(res));
+    }, (err) => {
+      console.log(JSON.stringify(err));
+    });
   }
 );
 
 export const GetFeedContent = createAsyncThunk(
   'userData/getFeedContentThunk', 
   async (data, { dispatch, rejectWithValue }) => {
+
     getRequest("feed/").then((res) => {
-      dispatch(setFeedContent(res.data.posts));
+      dispatch(setFeedContent(res.data));
       dispatch(setStatus(200));
       return;
     }, (err) => {
@@ -84,18 +88,13 @@ export const GetFeedContent = createAsyncThunk(
   }
 );
 
-export const GetExploreContent = createAsyncThunk(
-  'userData/getExploreContentThunk', 
-  async (data, { dispatch, rejectWithValue }) => {
-    getRequest("explore/").then((res) => {
-      dispatch(setExploreContent(res.data.posts));
-      dispatch(setStatus(200));
-      return;
-    }, (err) => {
-      console.log("error in Network.getExploreContent: " + JSON.stringify(err));
-      dispatch(setStatus(err.response.status));
-      return rejectWithValue(err.message);
-    });
-  }
-);
+export const GetExploreContent = async () => {
+  var res = await getRequest("explore/");
+  return res.data;
+};
+
+export const GetUserContentByUsername = async (username) => {
+  var res = await getRequest(`usernames/${username}`);
+  return res.data.user;
+};
 

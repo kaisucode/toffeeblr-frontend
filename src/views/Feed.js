@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
-import CenteredDiv from 'components/CenteredDiv';
 import PostCard from 'components/PostCard';
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,6 +20,7 @@ export default function Feed() {
       <h1 className="display-3">Feed</h1>
       { feedContent.map((value) => {
         return <PostCard 
+          key={value.id}
           username={value.username}
           userID={value.user_id}
           postID={value.id}
