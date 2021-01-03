@@ -13,6 +13,8 @@ import Login from './views/Login';
 import Feed from './views/Feed';
 import Explore from './views/Explore';
 import BlogProfile from './views/BlogProfile';
+import Following from './views/Following';
+import Followers from './views/Followers';
 
 const animatedRoutes = [
   // { path: '/', name: 'Home', Component: Homepage, ExitAnimation: 'slide-left' },
@@ -25,6 +27,8 @@ const exactRoutes = [
   { path: '/feed', name: 'Feed', Component: Feed }, 
   { path: '/explore', name: 'Explore', Component: Explore }, 
   { path: '/blog', name: 'Blog', Component: BlogProfile }, 
+  { path: '/following', name: 'Following', Component: Following }, 
+  { path: '/followers', name: 'Followers', Component: Followers }, 
 ];
 
 const wildcardRoutes = [

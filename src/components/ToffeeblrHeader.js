@@ -50,7 +50,7 @@ export default function ToffeeblrHeader(props) {
         <Nav.Link href="#notifs">Notifs</Nav.Link>
         <NavDropdown title="Account" id="collasible-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Likes</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2" className="d-flex justify-content-between">
+          <NavDropdown.Item as={NavLink} to="/following" className="d-flex justify-content-between">
             <div> Following </div>
             <div> {followingCount} </div>
           </NavDropdown.Item>
@@ -62,7 +62,7 @@ export default function ToffeeblrHeader(props) {
             <b>{username}</b>
           </NavDropdown.Item>
           <NavDropdown.Item href="#action/3.3">Posts</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.4" className="d-flex justify-content-between">
+          <NavDropdown.Item as={NavLink} to="/followers" className="d-flex justify-content-between">
             <div> Followers </div>
             <div> {followerCount} </div>
           </NavDropdown.Item>
@@ -74,7 +74,7 @@ export default function ToffeeblrHeader(props) {
 
   return (
     <React.Fragment>
-      <div className="border-bottom border-light">
+      <div className="border-bottom border-light mb-4">
         <Navbar collapseOnSelect className="mx-5 my-1" variant="dark" expand="lg">
 
           <Navbar.Brand href="/">Toffeeblr</Navbar.Brand>

@@ -4,9 +4,12 @@ import {
   setUsername, 
   setToken, 
   setStatus, 
+  setFollowers,
+  setFollowing, 
   setFollowerCount, 
   setFollowingCount, 
   setFeedContent, 
+  setExploreContent, 
 } from 'store/slices/userDataSlice';
 
 const url = "http://localhost:3000/";
@@ -80,24 +83,32 @@ export const GetFeedContent = createAsyncThunk(
     getRequest("feed/").then((res) => {
       dispatch(setFeedContent(res.data));
       dispatch(setStatus(200));
+      dispatch(GetRelationshipData());
       return;
     }, (err) => {
-      console.log("error in Network.getFeed: " + JSON.stringify(err));
+      console.log("error in Network.GetFeedContent: " + JSON.stringify(err));
       dispatch(setStatus(err.response.status));
       return rejectWithValue(err.message);
     });
   }
 );
 
-export const GetExploreContent = async () => {
-  var res = await getRequest("explore/");
-  return res.data;
-};
+export const GetExploreContent = createAsyncThunk(
+  'userData/getExploreContentThunk', 
+  async (data, { dispatch, rejectWithValue }) => {
 
-export const GetUserContentByUsername = async (username) => {
-  var res = await getRequest(`usernames/${username}`);
-  return res.data.user;
-};
+    getRequest("explore/").then((res) => {
+      dispatch(setExploreContent(res.data));
+      dispatch(setStatus(200));
+      dispatch(GetRelationshipData());
+      return;
+    }, (err) => {
+      console.log("error in Network.GetExploreContent: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
+      return rejectWithValue(err.message);
+    });
+  }
+);
 
 export const GetSelfContent = createAsyncThunk(
   'userData/getSelfContentThunk', 
@@ -116,4 +127,26 @@ export const GetSelfContent = createAsyncThunk(
     });
   }
 );
+
+export const GetRelationshipData = createAsyncThunk(
+  'userData/getRelationshipDataThunk', 
+  async (data, { dispatch, rejectWithValue }) => {
+
+    getRequest("relationships/").then((res) => {
+      dispatch(setFollowers(res.data.followers));
+      dispatch(setFollowing(res.data.following));
+      dispatch(setStatus(200));
+      return;
+    }, (err) => {
+      console.log("error in Network.GetRelationshipData: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
+      return rejectWithValue(err.message);
+    });
+  }
+);
+
+export const GetUserContentByUsername = async (username) => {
+  var res = await getRequest(`usernames/${username}`);
+  return res.data.user;
+};
 
