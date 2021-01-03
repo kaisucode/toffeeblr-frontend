@@ -17,7 +17,6 @@ export default function Feed() {
 
   return (
     <React.Fragment>
-      <h1 className="display-3">Feed</h1>
       { feedContent.map((value) => {
         return <PostCard 
           key={value.id}

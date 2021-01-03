@@ -14,23 +14,26 @@ import Feed from './views/Feed';
 import Explore from './views/Explore';
 import BlogProfile from './views/BlogProfile';
 
-const exactRoutes = [
+const animatedRoutes = [
   // { path: '/', name: 'Home', Component: Homepage, ExitAnimation: 'slide-left' },
   { path: '/', name: 'login', Component: Login, ExitAnimation: 'slide-left' },
   { path: '/signup', name: 'Sign up', Component: Signup, ExitAnimation: 'slide-left' }, 
   { path: '/login', name: 'Log in', Component: Login, ExitAnimation: 'slide-left' },
-  { path: '/feed', name: 'Feed', Component: Feed, ExitAnimation: '' }, 
-  { path: '/explore', name: 'Explore', Component: Explore, ExitAnimation: '' }, 
-  { path: '/blog', name: 'Blog', Component: BlogProfile, ExitAnimation: '' }, 
-]
+];
+
+const exactRoutes = [
+  { path: '/feed', name: 'Feed', Component: Feed }, 
+  { path: '/explore', name: 'Explore', Component: Explore }, 
+  { path: '/blog', name: 'Blog', Component: BlogProfile }, 
+];
 
 const wildcardRoutes = [
-  { path: '/blog/:username', name: 'Blog', Component: BlogProfile, ExitAnimation: '' }, 
-]
+  { path: '/blog/:username', name: 'Blog', Component: BlogProfile }, 
+];
 
 function App() {
-  function renderExactRoutes(){
-    return (exactRoutes.map(({ path, Component, ExitAnimation }) => (
+  function renderAnimatedRoutes(){
+    return (animatedRoutes.map(({ path, Component, ExitAnimation }) => (
       <Route key={path} exact path={path}>
         {({ match }) => (
           <CSSTransition
@@ -46,19 +49,18 @@ function App() {
     )));
   }
 
+  function renderExactRoutes(){
+    return (exactRoutes.map(({ path, Component }) => (
+      <Route key={path} exact path={path}>
+        <Component />
+      </Route>
+    )));
+  }
+
   function renderWildcardRoutes(){
     return (wildcardRoutes.map(({ path, Component, ExitAnimation }) => (
       <Route key={path} sensitive path={path}>
-        {({ match }) => (
-          <CSSTransition
-            in={match != null}
-            timeout={300}
-            classNames={ExitAnimation}
-            unmountOnExit
-          >
-            <Component />
-          </CSSTransition>
-        )}
+        <Component />
       </Route>
     )));
   }
@@ -76,6 +78,7 @@ function App() {
       <Container> 
         <Row className="row">
           <Col xs={12}>
+            { renderAnimatedRoutes() }
             { renderExactRoutes() }
             { renderWildcardRoutes() }
           </Col>

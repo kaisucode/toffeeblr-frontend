@@ -4,6 +4,8 @@ import {
   setUsername, 
   setToken, 
   setStatus, 
+  setFollowerCount, 
+  setFollowingCount, 
   setFeedContent, 
 } from 'store/slices/userDataSlice';
 
@@ -34,7 +36,6 @@ export const Login = createAsyncThunk(
     postRequest("auth/login/", userData).then((res) => {
       localStorage["jwtToken"] = res.data.token;
       dispatch(setToken(res.data.token));
-      dispatch(setUsername(res.data.username));
       dispatch(setStatus(200));
       return;
     }, (err) => {
@@ -97,4 +98,22 @@ export const GetUserContentByUsername = async (username) => {
   var res = await getRequest(`usernames/${username}`);
   return res.data.user;
 };
+
+export const GetSelfContent = createAsyncThunk(
+  'userData/getSelfContentThunk', 
+  async (data, { dispatch, rejectWithValue }) => {
+
+    getRequest("auth/self/").then((res) => {
+      dispatch(setUsername(res.data.username));
+      dispatch(setFollowerCount(res.data.follower_count));
+      dispatch(setFollowingCount(res.data.following_count));
+      dispatch(setStatus(200));
+      return;
+    }, (err) => {
+      console.log("error in Network.GetSelfBasicInfo: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
+      return rejectWithValue(err.message);
+    });
+  }
+);
 

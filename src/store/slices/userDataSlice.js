@@ -12,6 +12,10 @@ export const slice = createSlice({
     status: 200, 
     authState: 0, 
     feedContent: [], 
+    followers: [], 
+    following: [], 
+    followerCount: -1, 
+    followingCount: -1, 
   },
   reducers: {
     setUsername: (state, action) => {
@@ -30,10 +34,26 @@ export const slice = createSlice({
     setFeedContent: (state, action) => {
       state.feedContent = action.payload;
     }, 
+    setFollowers: (state, action) => {
+      state.followers = action.payload;
+      state.followerCount = action.payload.length;
+    }, 
+    setFollowing: (state, action) => {
+      state.following = action.payload;
+      state.followingCount = action.payload.length;
+    }, 
+    setFollowerCount: (state, action) => {
+      state.followerCount = action.payload;
+    }, 
+    setFollowingCount: (state, action) => {
+      state.followingCount = action.payload;
+    }, 
   },
 });
 
-export const { setUsername, setToken, setStatus, setAuthState, setFeedContent } = slice.actions;
+export const { 
+  setUsername, setToken, setStatus, setAuthState, setFeedContent, 
+  setFollowers, setFollowing, setFollowerCount, setFollowingCount } = slice.actions;
 
 // The function below is called a selector and allows us to select a value from
 // the state. Selectors can also be defined inline where they're used instead of
@@ -42,6 +62,10 @@ export const selectUsername = state => state.userData.username;
 export const selectStatus = state => state.userData.status;
 export const selectAuthState = state => state.userData.authState;
 export const selectFeedContent = state => state.userData.feedContent;
+export const selectFollowers = state => state.userData.followers;
+export const selectFollowing = state => state.userData.following;
+export const selectFollowerCount = state => state.userData.followerCount;
+export const selectFollowingCount = state => state.userData.followingCount;
 
 export default slice.reducer;
 

@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
-import { Navbar, Nav, NavDropdown, 
-  Form, FormControl, Button 
-} from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectUsername, selectFollowerCount, selectFollowingCount } from 'store/slices/userDataSlice';
+
+import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import NewPost from 'components/NewPost';
+
+import * as Network from 'api/Network';
 
 export default function ToffeeblrHeader(props) {
   const [modalShow, setModalShow] = useState(false);
+  const dispatch = useDispatch();
+  const username = useSelector(selectUsername);
+  const followerCount = useSelector(selectFollowerCount);
+  const followingCount = useSelector(selectFollowingCount);
+
+  useEffect(() => {
+    dispatch(Network.GetSelfContent());
+  }, []);
 
   function renderOtherButton(){
     var link, text;
@@ -33,17 +44,28 @@ export default function ToffeeblrHeader(props) {
   function renderUserOptions(){
     return (
       <Nav className="ml-auto">
-        <Nav.Link href="/feed">Feed</Nav.Link>
-        <Nav.Link href="/explore">Explore</Nav.Link>
+        <Nav.Link as={NavLink} to="/feed">Feed</Nav.Link>
+        <Nav.Link as={NavLink} to="/explore">Explore</Nav.Link>
         <Nav.Link href="#inbox">Inbox</Nav.Link>
         <Nav.Link href="#notifs">Notifs</Nav.Link>
         <NavDropdown title="Account" id="collasible-nav-dropdown">
           <NavDropdown.Item href="#action/3.1">Likes</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2">Following</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.2" className="d-flex justify-content-between">
+            <div> Following </div>
+            <div> {followingCount} </div>
+          </NavDropdown.Item>
           <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
+
           <NavDropdown.Divider />
+
+          <NavDropdown.Item as={NavLink} to={`/blog/${username}`}>
+            <b>{username}</b>
+          </NavDropdown.Item>
           <NavDropdown.Item href="#action/3.3">Posts</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.4">Followers</NavDropdown.Item>
+          <NavDropdown.Item href="#action/3.4" className="d-flex justify-content-between">
+            <div> Followers </div>
+            <div> {followerCount} </div>
+          </NavDropdown.Item>
         </NavDropdown>
         <Nav.Link onClick={() => setModalShow(true)}>New Post</Nav.Link>
       </Nav>

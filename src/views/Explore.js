@@ -14,7 +14,6 @@ export default function Explore() {
 
   return (
     <React.Fragment>
-      <h1 className="display-3">Explore</h1>
       { exploreContent.map((value) => {
         return <PostCard 
           key={value.id}
