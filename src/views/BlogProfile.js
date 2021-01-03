@@ -8,14 +8,18 @@ export default function BlogProfile() {
   const [userContent, setUserContent] = useState([]);
   
   useEffect(() => {
-    Network.GetUserContentByUsername(match.params.username).then((res) => {
-      setUserContent(res);
-    });
+    if (match){
+      Network.GetUserContentByUsername(match.params.username).then((res) => {
+        setUserContent(res);
+      });
+    }
   }, []);
 
   return (
     <React.Fragment>
-      <h1 className="display-3">{ match.params.username }</h1>
+      { match && 
+        <h1 className="display-3">{ match.params.username }</h1>
+      }
 
       { userContent.posts &&
         userContent.posts.map((value) => {

@@ -25,7 +25,7 @@ const exactRoutes = [
 ]
 
 const wildcardRoutes = [
-  { path: '/blog', name: 'Blog', Component: BlogProfile, ExitAnimation: '' }, 
+  { path: '/blog/:username', name: 'Blog', Component: BlogProfile, ExitAnimation: '' }, 
 ]
 
 function App() {

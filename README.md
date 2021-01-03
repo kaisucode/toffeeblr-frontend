@@ -20,6 +20,7 @@ Made with React and React Bootstrap
 - [x] View other blogs [router pass params](https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component)
 - [ ] Refresh on new post creation
 - [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list )
+- [ ] Comments / Reblogs
 
 - [x] Apply login on signup
 - [x] Auth state numbers
@@ -31,6 +32,7 @@ Made with React and React Bootstrap
 - [ ] Reroute pages that require token headers to home or login page
 
 - [ ] Lazy loading / pagination requests
+- [ ] Tags
 - [ ] Searchbar
 - [ ] Notifications
 - [ ] Messaging??
