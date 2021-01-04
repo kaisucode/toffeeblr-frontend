@@ -5,7 +5,6 @@ import { Container, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFollowing, selectUsername } from 'store/slices/userDataSlice';
 import * as Network from 'api/Network';
-import './PostCard.scss';
 
 export default function PostCard(props) {
   const dispatch = useDispatch();
@@ -23,7 +22,7 @@ export default function PostCard(props) {
 
   return (
     <Container>
-      <Card className="card-style">
+      <Card className="text-left text-secondary mb-3">
         <Card.Header as="h6" className="d-flex justify-content-start align-items-center">
           <NavLink className="text-secondary" to={`/blog/${props.username}`}>
             <b> { props.username } </b>

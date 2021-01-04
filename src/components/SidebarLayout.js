@@ -5,7 +5,6 @@ export default function SidebarLayout(props){
   return (
     <Container>
       <Row>
-        <Col md="1" /> 
         <Col md="7">
           { props.children }
         </Col>

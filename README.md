@@ -18,9 +18,9 @@ Made with React and React Bootstrap
 - [x] Feed
 - [x] New post
 - [x] View other blogs [router pass params](https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component)
-- [ ] Follow button in navbar
-- [ ] Refresh on new post creation
+- [x] Follow button in navbar
 - [ ] Determine which ones are two-way follows for the followers list
+- [ ] Refresh on new post creation
 - [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list )
 - [ ] Comments / Reblogs
 

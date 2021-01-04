@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectUsername, selectFollowerCount, selectFollowingCount } from 'store/slices/userDataSlice';
+import { selectUsername, selectFollowerCount, selectFollowingCount, selectFollowing } from 'store/slices/userDataSlice';
 
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import NewPost from 'components/NewPost';
@@ -10,15 +10,30 @@ import NewPost from 'components/NewPost';
 import * as Network from 'api/Network';
 
 export default function ToffeeblrHeader(props) {
-  const [modalShow, setModalShow] = useState(false);
+  const match = useRouteMatch('/blog/:username');
   const dispatch = useDispatch();
   const username = useSelector(selectUsername);
   const followerCount = useSelector(selectFollowerCount);
   const followingCount = useSelector(selectFollowingCount);
+  const following = useSelector(selectFollowing);
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     dispatch(Network.GetSelfContent());
+    dispatch(Network.GetRelationshipData());
   }, []);
+
+  function followUser(){
+    if (match){
+      dispatch(Network.FollowUser(match.params.username));
+    }
+  }
+
+  function unfollowUser(){
+    if (match){
+      dispatch(Network.UnfollowUser(match.params.username));
+    }
+  }
 
   function renderOtherButton(){
     var link, text;
@@ -39,6 +54,27 @@ export default function ToffeeblrHeader(props) {
           </NavLink>
       </Nav>
     );
+  }
+
+  function renderFollowButton(){
+    var text;
+    var func;
+    if (following.includes(match.params.username)){
+      text = "Unfollow";
+      func = unfollowUser;
+    }
+    else{
+      text = "Follow";
+      func = followUser;
+    }
+
+    return (
+      <Button variant="outline-success" 
+        className="ml-3"
+        onClick={func} > 
+        {text}
+      </Button>
+    )
   }
 
   function renderUserOptions(){
@@ -68,6 +104,10 @@ export default function ToffeeblrHeader(props) {
           </NavDropdown.Item>
         </NavDropdown>
         <Nav.Link onClick={() => setModalShow(true)}>New Post</Nav.Link>
+
+        { props.isBlogProfile &&
+            renderFollowButton()
+        }
       </Nav>
     );
   }
@@ -78,9 +118,7 @@ export default function ToffeeblrHeader(props) {
         <Navbar collapseOnSelect className="mx-5 my-1" variant="dark" expand="lg">
 
           <Navbar.Brand href="/">Toffeeblr</Navbar.Brand>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="ml-2" />
-          </Form>
+          <Form inline> <FormControl type="text" placeholder="Search" className="ml-2" /> </Form>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
           <Navbar.Collapse id="responsive-navbar-nav">
@@ -100,10 +138,12 @@ ToffeeblrHeader.propTypes = {
   emptyHeader: PropTypes.bool.isRequired, 
   displayUserOptions: PropTypes.bool.isRequired,
   isLogin: PropTypes.bool, 
+  isBlogProfile: PropTypes.bool, 
 };
 
 ToffeeblrHeader.defaultProps = {
   emptyHeader: false, 
   displayUserOptions: false, 
+  isBlogProfile: false, 
 };
 

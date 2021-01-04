@@ -76,6 +76,7 @@ function App() {
         <Route exact path="/login" render={() => (<ToffeeblrHeader isLogin={true} />)}></Route>
         <Route exact path="/signup" render={() => (<ToffeeblrHeader isLogin={false} />)}></Route>
         <Route exact path="/" render={() => (<ToffeeblrHeader emptyHeader={true} />)}></Route>
+        <Route path="/blog/:username" render={() => (<ToffeeblrHeader displayUserOptions={true} isBlogProfile={true}/>)}></Route>
         <Route path="/" render={() => (<ToffeeblrHeader displayUserOptions={true} />)}></Route>
       </Switch>
 
