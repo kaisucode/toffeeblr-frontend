@@ -74,7 +74,7 @@ export default function ToffeeblrHeader(props) {
 
   return (
     <React.Fragment>
-      <div className="border-bottom border-light mb-4">
+      <div className="border-bottom border-light mb-5">
         <Navbar collapseOnSelect className="mx-5 my-1" variant="dark" expand="lg">
 
           <Navbar.Brand href="/">Toffeeblr</Navbar.Brand>

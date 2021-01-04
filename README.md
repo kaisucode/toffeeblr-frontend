@@ -18,7 +18,9 @@ Made with React and React Bootstrap
 - [x] Feed
 - [x] New post
 - [x] View other blogs [router pass params](https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component)
+- [ ] Follow button in navbar
 - [ ] Refresh on new post creation
+- [ ] Determine which ones are two-way follows for the followers list
 - [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list )
 - [ ] Comments / Reblogs
 
@@ -31,6 +33,8 @@ Made with React and React Bootstrap
 - [ ] Switch over to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
 - [ ] Reroute pages that require token headers to home or login page
 
+- [ ] Hover showing recent posts of a user
+- [ ] Sidebar user profile
 - [ ] Lazy loading / pagination requests
 - [ ] Tags
 - [ ] Searchbar

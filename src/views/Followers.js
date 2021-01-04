@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import RelationshipsList from 'components/RelationshipsList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFollowers, selectFollowerCount } from 'store/slices/userDataSlice';
-
 import * as Network from 'api/Network';
+
+import RelationshipsList from 'components/RelationshipsList';
+import SidebarLayout from 'components/SidebarLayout';
 
 export default function Followers(){
   const dispatch = useDispatch();
@@ -14,11 +15,15 @@ export default function Followers(){
     dispatch(Network.GetRelationshipData());
   }, []);
 
+  function followUser(otherUsername){
+    dispatch(Network.FollowUser(otherUsername));
+  }
+
   return (
-    <React.Fragment>
-      <h3 className="display-6"> {followerCount} Followers </h3>
-      <RelationshipsList listData={followers} actionButtonText={"Follow"} />
-    </React.Fragment>
+    <SidebarLayout>
+      <h3 className="display-6"> {followerCount} Followers </h3> 
+      <RelationshipsList listData={followers} actionButtonText={"Follow"} buttonAction={followUser}/>
+    </SidebarLayout>
   );
 }
 

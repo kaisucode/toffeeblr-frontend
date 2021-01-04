@@ -32,6 +32,15 @@ export const getRequest = async (resource) => {
   return res;
 }
 
+export const deleteRequest = async (resource) => {
+  const res = await axios.delete(url + resource, {
+    headers: {
+      'Authorization': localStorage.getItem("jwtToken")
+    }
+  });
+  return res;
+}
+
 export const Login = createAsyncThunk(
   'userData/loginThunk', 
   async (userData, { dispatch, rejectWithValue }) => {
@@ -149,4 +158,38 @@ export const GetUserContentByUsername = async (username) => {
   var res = await getRequest(`usernames/${username}`);
   return res.data.user;
 };
+
+export const FollowUser = createAsyncThunk(
+  'userData/followUserThunk', 
+  async (otherUsername, { dispatch, rejectWithValue }) => {
+
+    postRequest("relationships/", { "profile_username": otherUsername }).then((res) => {
+      dispatch(setFollowers(res.data.followers));
+      dispatch(setFollowing(res.data.following));
+      dispatch(setStatus(200));
+      return;
+    }, (err) => {
+      console.log("error in Network.FollowUser: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
+      return rejectWithValue(err.message);
+    });
+  }
+);
+
+export const UnfollowUser = createAsyncThunk(
+  'userData/unfollowUserThunk', 
+  async (otherUsername, { dispatch, rejectWithValue }) => {
+
+    deleteRequest(`relationships/${otherUsername}`).then((res) => {
+      dispatch(setFollowers(res.data.followers));
+      dispatch(setFollowing(res.data.following));
+      dispatch(setStatus(200));
+      return;
+    }, (err) => {
+      console.log("error in Network.UnfollowUser: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
+      return rejectWithValue(err.message);
+    });
+  }
+);
 

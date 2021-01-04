@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
-import RelationshipsList from 'components/RelationshipsList';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectFollowing, selectFollowingCount } from 'store/slices/userDataSlice';
-
-import { Row, Col, Container } from 'react-bootstrap';
-
 import * as Network from 'api/Network';
+
+import RelationshipsList from 'components/RelationshipsList';
+import SidebarLayout from 'components/SidebarLayout';
 
 export default function Following(){
   const dispatch = useDispatch();
@@ -16,27 +15,15 @@ export default function Following(){
     dispatch(Network.GetRelationshipData());
   }, []);
 
+  function unfollowUser(otherUsername){
+    dispatch(Network.UnfollowUser(otherUsername));
+  }
+
   return (
-    <React.Fragment>
-      <Container>
-        <Row> 
-          <Col md="1" /> 
-          <Col md="7" className="text-left">
-            <h3 className="display-6"> {followingCount} Following </h3> 
-          </Col>
-        </Row>
-        <Row>
-          <Col md="1" /> 
-          <Col md="7">
-            <RelationshipsList listData={following} actionButtonText={"Unfollow"} />
-          </Col>
-          <Col md="4" className="d-none d-sm-block">
-            Check out these!!<br />
-            Radar
-          </Col>
-        </Row>
-      </Container>
-    </React.Fragment>
+    <SidebarLayout>
+      <h3 className="display-6 text-left"> {followingCount} Following </h3> 
+      <RelationshipsList listData={following} actionButtonText={"Unfollow"} buttonAction={unfollowUser} />
+    </SidebarLayout>
   );
 }
 

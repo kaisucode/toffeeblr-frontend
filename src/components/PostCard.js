@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Container, Card, Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectFollowing, selectUsername } from 'store/slices/userDataSlice';
+import * as Network from 'api/Network';
 import './PostCard.scss';
 
 export default function PostCard(props) {
-
+  const dispatch = useDispatch();
   const username = useSelector(selectUsername);
   const following = useSelector(selectFollowing);
-  const [hideFollowButton, setHideFollowButton] = useState(false);
+  const [showFollowButton, setShowFollowButton] = useState(false);
 
   useEffect(() => {
-    setHideFollowButton(following.includes(props.username) || props.username === username);
-  }, []);
+    setShowFollowButton(!following.includes(props.username) && props.username != username);
+  }, [following]);
 
   function followUser(){
-    console.log("trying to follow user");
+    dispatch(Network.FollowUser(props.username));
   }
 
   return (
@@ -28,7 +29,7 @@ export default function PostCard(props) {
             <b> { props.username } </b>
           </NavLink>
 
-          { hideFollowButton ||
+          { showFollowButton &&
           <Button 
             className="mx-3 text-success" 
             variant="primary" 
