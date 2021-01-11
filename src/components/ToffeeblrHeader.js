@@ -97,7 +97,8 @@ export default function ToffeeblrHeader(props) {
           <NavDropdown.Item as={NavLink} to={`/blog/${username}`}>
             <b>{username}</b>
           </NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.3">Posts</NavDropdown.Item>
+
+          <NavDropdown.Item as={NavLink} to={`/blog/${username}`}>Posts</NavDropdown.Item>
           <NavDropdown.Item as={NavLink} to="/followers" className="d-flex justify-content-between">
             <div> Followers </div>
             <div> {followerCount} </div>

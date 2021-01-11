@@ -8,7 +8,7 @@ export default function SidebarLayout(props){
         <Col md="7">
           { props.children }
         </Col>
-        <Col md="4" className="d-none d-sm-block">
+        <Col md="5" className="d-none d-sm-block">
           <h4 className="display-6"> Check out these!! </h4> 
           <br />
           <br />

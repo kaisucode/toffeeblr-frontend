@@ -1,0 +1,15 @@
+@import "styles/Theme.scss";
+
+.mode-button{
+	&:hover{
+		color: map-get($theme-colors, "success");
+		cursor: pointer;
+	}
+}
+
+.active-mode-button{
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+

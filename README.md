@@ -22,7 +22,10 @@ Made with React and React Bootstrap
 - [ ] Determine which ones are two-way follows for the followers list
 - [ ] Refresh on new post creation
 - [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list )
-- [ ] Comments / Reblogs
+- [ ] Likes
+- [ ] Tags
+- [ ] Comments
+- [ ] Reblogs
 
 - [x] Apply login on signup
 - [x] Auth state numbers
@@ -36,7 +39,6 @@ Made with React and React Bootstrap
 - [ ] Hover showing recent posts of a user
 - [ ] Sidebar user profile
 - [ ] Lazy loading / pagination requests
-- [ ] Tags
 - [ ] Searchbar
 - [ ] Notifications
 - [ ] Messaging??

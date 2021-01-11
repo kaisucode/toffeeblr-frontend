@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectFollowing, selectUsername } from 'store/slices/userDataSlice';
 import * as Network from 'api/Network';
 
+import { Heart, Cursor, Chat, ArrowRepeat } from 'react-bootstrap-icons';
+
 export default function PostCard(props) {
   const dispatch = useDispatch();
   const username = useSelector(selectUsername);
@@ -49,11 +51,12 @@ export default function PostCard(props) {
 
         <Card.Footer className="text-muted d-flex justify-content-between align-items-center">
           <div className="d-flex justify-content-start">
-            <div>num-of-notes+link,&nbsp;</div>
-            <div>reblog,&nbsp;</div>
-            <div>comment</div> 
+            <div className="mr-3"># notes</div>
+            <Cursor className="mr-3" size={20} />
+            <Chat className="mr-3" size={20} />
+            <ArrowRepeat className="mr-3" size={20} />
           </div>
-          <div>like </div>
+          <Heart size={20} />
         </Card.Footer>
 
       </Card>
