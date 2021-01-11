@@ -11,13 +11,17 @@ import { Tab, Tabs, Container, Row, Col } from 'react-bootstrap';
 export default function BlogProfile() {
   const match = useRouteMatch('/blog/:username');
   const [userContent, setUserContent] = useState({});
+  const [userLikes, setUserLikes] = useState([]);
   const [mode, setMode] = useState("posts");
 
   useEffect(() => {
     if (match){
       Network.GetUserContentByUsername(match.params.username).then((res) => {
         setUserContent(res);
-        console.log(JSON.stringify(res, null, 2)); 
+        var postIds = res.likes.map((value) => { return value.id });
+        Network.GetPostsFromArray(postIds).then((likedPosts) => {
+          setUserLikes(likedPosts);
+        })
       });
     }
   }, []);
@@ -36,13 +40,27 @@ export default function BlogProfile() {
     }
   }
 
+  function renderLikes(){
+    if (userLikes){
+      return userLikes.map((value) => {
+        return <PostCard 
+          key={value.id}
+          username={value.username}
+          userID={value.user_id}
+          postID={value.id}
+          title={value.title} 
+          content={value.content} />
+      })
+    }
+  }
+
   function renderMode(){
-    if (mode === "posts"){
+    if (mode === "posts")
       return renderPosts();
-    }
-    else if (mode === "following"){
+    else if (mode === "likes")
+      return renderLikes();
+    else if (mode === "following")
       return (<RelationshipsList listData={userContent.following} displayButton={false}/>);
-    }
   }
 
   function getClassName(aMode){

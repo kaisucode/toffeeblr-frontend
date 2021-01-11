@@ -159,6 +159,11 @@ export const GetUserContentByUsername = async (username) => {
   return res.data.user;
 };
 
+export const GetPostsFromArray = async (data) => {
+  var res = await postRequest("someposts", { "post_ids": data });
+  return res.data;
+}
+
 export const FollowUser = createAsyncThunk(
   'userData/followUserThunk', 
   async (otherUsername, { dispatch, rejectWithValue }) => {
