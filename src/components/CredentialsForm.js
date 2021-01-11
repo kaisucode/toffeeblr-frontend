@@ -16,14 +16,6 @@ export default function CredentialsForm(props) {
   const bannerText = props.isLogin ? "Log in to your account" : "Sign up for Toffeeblr";
   const buttonText = props.isLogin ? "Log In" : "Sign Up";
 
-  // Auto login for development
-  useEffect(() => {
-    if (props.isLogin){
-      const data = { username: "kevin", password: "123456" };
-      dispatch(Network.Login(data));
-    }
-  }, []);
-
   function processInfo(){
     if (username.length > 20 || username === "" || password.length > 20 || password.length < 3){
       console.log("incorrect lengths");

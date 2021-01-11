@@ -20,13 +20,7 @@ export default function Explore() {
   return (
     <SidebarLayout>
       { exploreContent.map((value) => {
-        return <PostCard 
-          key={value.id}
-          username={value.username}
-          userID={value.user_id}
-          postID={value.id}
-          title={value.title} 
-          content={value.content} />
+        return <PostCard post={value} key={value.id}/>
       })}
     </SidebarLayout>
   );

@@ -6,7 +6,7 @@ import './BlogProfile.scss';
 import PostCard from 'components/PostCard';
 import SidebarLayout from 'components/SidebarLayout';
 import RelationshipsList from 'components/RelationshipsList';
-import { Tab, Tabs, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 
 export default function BlogProfile() {
   const match = useRouteMatch('/blog/:username');
@@ -18,10 +18,9 @@ export default function BlogProfile() {
     if (match){
       Network.GetUserContentByUsername(match.params.username).then((res) => {
         setUserContent(res);
-        var postIds = res.likes.map((value) => { return value.id });
-        Network.GetPostsFromArray(postIds).then((likedPosts) => {
+        Network.GetPostsFromArray(res.likes).then((likedPosts) => {
           setUserLikes(likedPosts);
-        })
+        });
       });
     }
   }, []);
@@ -29,13 +28,7 @@ export default function BlogProfile() {
   function renderPosts(){
     if (userContent.posts){
       return userContent.posts.map((value) => {
-        return <PostCard 
-          key={value.id}
-          username={value.username}
-          userID={value.user_id}
-          postID={value.id}
-          title={value.title} 
-          content={value.content} />
+        return <PostCard post={value} key={value.id}/>
       })
     }
   }
@@ -43,13 +36,7 @@ export default function BlogProfile() {
   function renderLikes(){
     if (userLikes){
       return userLikes.map((value) => {
-        return <PostCard 
-          key={value.id}
-          username={value.username}
-          userID={value.user_id}
-          postID={value.id}
-          title={value.title} 
-          content={value.content} />
+        return <PostCard post={value} key={value.id} />
       })
     }
   }
@@ -64,12 +51,8 @@ export default function BlogProfile() {
   }
 
   function getClassName(aMode){
-    if (mode === aMode){
-      return "active-mode-button mode-button";
-    }
-    else{
-      return "mode-button";
-    }
+    let prefix = (mode === aMode) ? "active-mode-button " : "";
+    return (prefix + "mode-button"); 
   }
 
   return (

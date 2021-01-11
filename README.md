@@ -35,6 +35,7 @@ Made with React and React Bootstrap
 - [ ] TextArea stretch container instead of displaying a scrollbar 
 - [ ] Switch over to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
 - [ ] Reroute pages that require token headers to home or login page
+- [ ] If not signed in, dont show all the follow buttons
 
 - [ ] Hover showing recent posts of a user
 - [ ] Sidebar user profile

@@ -21,6 +21,10 @@ export default function ToffeeblrHeader(props) {
   useEffect(() => {
     dispatch(Network.GetSelfContent());
     dispatch(Network.GetRelationshipData());
+
+    // Auto login for development
+    const data = { username: "kevin", password: "123456" };
+    dispatch(Network.Login(data));
   }, []);
 
   function followUser(){

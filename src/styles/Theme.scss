@@ -29,3 +29,9 @@ $body-bg: $grey;
 // $link-hover-decoration: none;
 // $hr-border-color: #000;
 
+.likeButton{
+	&:hover{
+		cursor: pointer;
+	}
+}
+

@@ -19,14 +19,8 @@ export default function Feed() {
 
   return (
     <SidebarLayout>
-      { feedContent.map((value) => {
-        return <PostCard 
-          key={value.id}
-          username={value.username}
-          userID={value.user_id}
-          postID={value.id}
-          title={value.title} 
-          content={value.content} />
+      { feedContent.map((value) => { 
+        return <PostCard post={value} key={value.id}/> 
       })}
     </SidebarLayout>
   );
