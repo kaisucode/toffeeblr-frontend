@@ -14,20 +14,44 @@ export default function PostCard({ post }) {
   const following = useSelector(selectFollowing);
   const [showFollowButton, setShowFollowButton] = useState(false);
   const [likeButtonHover, setLikeButtonHover] = useState(false);
+  const [userLiked, setUserLiked] = useState(post.userLiked);
 
   useEffect(() => {
-    setShowFollowButton(!following.includes(post.username) && post.username != username);
+    setShowFollowButton(!following.includes(post.username) && post.username !== username);
   }, [following]);
 
   function followUser(){
     dispatch(Network.FollowUser(post.username));
   }
 
+  function likePost(){
+    dispatch(Network.LikePost(post.id)).then((res) => {
+      setUserLiked(true);
+    });
+  }
+
+  function unlikePost(){
+    dispatch(Network.UnlikePost(post.id)).then((res) => {
+      setUserLiked(false);
+    });
+  }
+
   function renderLikeButton(){
-    if (post.userLiked)
-      return <HeartFill size={20} className="likeButton" style={{color: "rgba(255, 0, 0, 0.6)"}}/>
-    else
-      return <Heart size={20} className="likeButton"/>
+    if (userLiked){
+      return <HeartFill 
+        size={20} 
+        className="likeButton" 
+        style={{color: "rgba(255, 0, 0, 0.6)"}}
+        onClick={unlikePost}
+      />
+    }
+    else{
+      return <Heart 
+        size={20} 
+        className="likeButton"
+        onClick={likePost}
+      />
+    }
   }
 
   return (
@@ -65,8 +89,7 @@ export default function PostCard({ post }) {
             <ArrowRepeat className="mr-3" size={20} />
           </div>
 
-          <div 
-            className="like-button-container"
+          <div className="like-button-container"
             onMouseOver={() => setLikeButtonHover(true)} 
             onMouseOut={() => setLikeButtonHover(false)} >
             {renderLikeButton()}
@@ -79,25 +102,16 @@ export default function PostCard({ post }) {
 }
 
 PostCard.propTypes = {
-  username: PropTypes.string.isRequired,
-  userID: PropTypes.number.isRequired, 
-  postID: PropTypes.number.isRequired, 
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired, 
-  post: PropTypes.object, 
+  post: PropTypes.object.isRequired 
 };
 
 PostCard.defaultProps = {
-  username: "no-username", 
-  userID: -1,
-  postID: -1, 
-  title: "post-title", 
-  content: "post-content", 
   post: {
     username: "no-username", 
     userID: -1,
     postID: -1, 
     title: "post-title", 
-    content: "post-content"
+    content: "post-content", 
+    userLiked: false
   }
 };

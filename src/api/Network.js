@@ -198,3 +198,30 @@ export const UnfollowUser = createAsyncThunk(
   }
 );
 
+export const LikePost = createAsyncThunk(
+  'userData/likePostThunk', 
+  async (postID, { dispatch, rejectWithValue }) => {
+    getRequest(`posts/${postID}/like`).then((res) => {
+      return;
+    }, (err) => {
+      console.log("error in Network.LikePost: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
+      return rejectWithValue(err.message);
+    });
+  }
+);
+
+export const UnlikePost = createAsyncThunk(
+  'userData/unlikePostThunk', 
+  async (postID, { dispatch, rejectWithValue }) => {
+    getRequest(`posts/${postID}/unlike`).then((res) => {
+      return;
+    }, (err) => {
+      console.log("error in Network.LikePost: " + JSON.stringify(err));
+      dispatch(setStatus(err.response.status));
+      return rejectWithValue(err.message);
+    });
+  }
+);
+
+

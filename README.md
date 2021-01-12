@@ -22,7 +22,8 @@ Made with React and React Bootstrap
 - [ ] Determine which ones are two-way follows for the followers list
 - [ ] Refresh on new post creation
 - [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list )
-- [ ] Likes
+- [x] Likes
+- [ ] Display number of notes
 - [ ] Tags
 - [ ] Comments
 - [ ] Reblogs
@@ -36,6 +37,7 @@ Made with React and React Bootstrap
 - [ ] Switch over to [react-router-transition](https://www.npmjs.com/package/react-router-transition) for better animations
 - [ ] Reroute pages that require token headers to home or login page
 - [ ] If not signed in, dont show all the follow buttons
+- [ ] Show edit button and hide like button if it's your own post
 
 - [ ] Hover showing recent posts of a user
 - [ ] Sidebar user profile
