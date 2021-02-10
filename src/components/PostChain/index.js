@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Container, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Heart, HeartFill, Cursor, Chat, ArrowRepeat } from 'react-bootstrap-icons';
+import NewPost from 'components/NewPost';
 import PostCard from './PostCard';
 import * as Network from 'api/Network';
 
-export default function PostChain({ fullPost }) {
+export default function PostChain({ fullPost, displayFooter }) {
 
   const post = fullPost[0];
   const dispatch = useDispatch();
   const [likeButtonHover, setLikeButtonHover] = useState(false);
   const [userLiked, setUserLiked] = useState(post.userLiked);
   const [numOfNotes, setNumOfNotes] = useState(0);
+
+  const [modalShow, setModalShow] = useState(false);
 
   useEffect(() => {
     console.log(JSON.stringify(fullPost, null, 2))
@@ -41,7 +45,7 @@ export default function PostChain({ fullPost }) {
     if (userLiked){
       return <HeartFill 
         size={20} 
-        className="likeButton" 
+        className="iconButton" 
         style={{color: "rgba(255, 0, 0, 0.6)"}}
         onClick={unlikePost}
       />
@@ -49,7 +53,7 @@ export default function PostChain({ fullPost }) {
     else{
       return <Heart 
         size={20} 
-        className="likeButton"
+        className="iconButton"
         onClick={likePost}
       />
     }
@@ -59,10 +63,13 @@ export default function PostChain({ fullPost }) {
     return (
       <Card.Footer className="text-muted d-flex justify-content-between align-items-center">
         <div className="d-flex justify-content-start">
-          <div className="mr-3">{ numOfNotes } notes</div>
-          <Cursor className="mr-3" size={20} />
-          <Chat className="mr-3" size={20} />
-          <ArrowRepeat className="mr-3" size={20} />
+          <div className="mr-3">
+            { numOfNotes }
+            { (numOfNotes != 1) ? " notes" : " note" }
+          </div>
+          <Cursor className="mr-3 iconButton" size={20} />
+          <Chat className="mr-3 iconButton" size={20} />
+          <ArrowRepeat className="mr-3 iconButton" size={20} onClick={() => setModalShow(true)} />
         </div>
 
         <div className="like-button-container"
@@ -78,9 +85,18 @@ export default function PostChain({ fullPost }) {
     <Container className="mb-3">
       <Card className="text-left text-secondary">
         {fullPost.slice(0).reverse().map((value) => <PostCard post={value} key={value.id}/>)}
-        {renderFooter()}
+        { displayFooter && renderFooter()}
       </Card>
+      <NewPost modalShow={modalShow} onHide={() => setModalShow(false)} parent_id={post.id} parent_post={fullPost}/>
     </Container>
   );
 }
 
+PostChain.propTypes = {
+  fullPost: PropTypes.object.isRequired,
+  displayFooter: PropTypes.bool
+};
+
+PostChain.defaultProps = {
+  displayFooter: true
+};

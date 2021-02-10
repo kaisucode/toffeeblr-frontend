@@ -21,13 +21,9 @@ Made with React and React Bootstrap
 - [x] Follow button in navbar
 - [x] Likes
 - [x] Display number of notes
-- [ ] Don't show follow if on users' own page
-- [ ] Determine which ones are two-way follows for the followers list
-- [ ] Refresh on new post creation
 - [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list )
-- [ ] Refresh feed and explore page each time their nav buttons are clicked
 - [ ] Comments
-- [ ] Reblogs
+- [x] Reblogs
 - [ ] Tags
 
 - [x] Apply login on signup
@@ -41,12 +37,20 @@ Made with React and React Bootstrap
 - [ ] If not signed in, dont show all the follow buttons
 - [ ] Show edit button and hide like button if it's your own post
 
+## Provisionary tasks
 - [ ] Hover showing recent posts of a user
 - [ ] Sidebar user profile
 - [ ] Lazy loading / pagination requests
 - [ ] Searchbar
 - [ ] Notifications
 - [ ] Messaging??
+
+## Bugs
+- [ ] Like status not showing on user liked page posts
+- [ ] Don't show follow if on users' own page
+- [ ] Determine which ones are two-way follows for the followers list
+- [ ] Refresh feed and explore page each time their nav buttons are clicked
+- [ ] Refresh on new post creation
 
 ## Redux should store
 - username & token
