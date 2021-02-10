@@ -59,7 +59,7 @@ export default function PostCard({ post }) {
 
   return (
     <Container>
-      <Card className="text-left text-secondary mb-3">
+      <Card className="text-left text-secondary">
         <Card.Header as="h6" className="d-flex justify-content-start align-items-center">
           <NavLink className="text-secondary" to={`/blog/${post.username}`}>
             <b> { post.username } </b>

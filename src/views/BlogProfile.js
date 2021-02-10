@@ -3,7 +3,7 @@ import { useRouteMatch } from 'react-router-dom';
 import * as Network from 'api/Network';
 import './BlogProfile.scss';
 
-import PostCard from 'components/PostCard';
+import PostChain from 'components/PostChain/';
 import SidebarLayout from 'components/SidebarLayout';
 import RelationshipsList from 'components/RelationshipsList';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -28,7 +28,7 @@ export default function BlogProfile() {
   function renderPosts(){
     if (userContent.posts){
       return userContent.posts.map((value) => {
-        return <PostCard post={value} key={value.id}/>
+        return <PostChain fullPost={value} key={value.id}/>
       })
     }
   }
@@ -36,7 +36,7 @@ export default function BlogProfile() {
   function renderLikes(){
     if (userLikes){
       return userLikes.map((value) => {
-        return <PostCard post={value} key={value.id} />
+        return <PostChain fullPost={value} key={value.id} />
       })
     }
   }

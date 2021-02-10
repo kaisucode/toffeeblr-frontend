@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectStatus, selectExploreContent } from 'store/slices/userDataSlice';
 import * as Network from 'api/Network';
 
-import PostCard from 'components/PostCard';
+import PostChain from 'components/PostChain';
 import SidebarLayout from 'components/SidebarLayout';
 
 export default function Explore() {
@@ -20,7 +20,7 @@ export default function Explore() {
   return (
     <SidebarLayout>
       { exploreContent.map((value) => {
-        return <PostCard post={value} key={value.id}/>
+        return <PostChain fullPost={value} key={value.id}/>
       })}
     </SidebarLayout>
   );
