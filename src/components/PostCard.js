@@ -15,6 +15,7 @@ export default function PostCard({ post }) {
   const [showFollowButton, setShowFollowButton] = useState(false);
   const [likeButtonHover, setLikeButtonHover] = useState(false);
   const [userLiked, setUserLiked] = useState(post.userLiked);
+  const [numOfNotes, setNumOfNotes] = useState(post.likes.length);
 
   useEffect(() => {
     setShowFollowButton(!following.includes(post.username) && post.username !== username);
@@ -27,12 +28,14 @@ export default function PostCard({ post }) {
   function likePost(){
     dispatch(Network.LikePost(post.id)).then((res) => {
       setUserLiked(true);
+      setNumOfNotes(numOfNotes + 1);
     });
   }
 
   function unlikePost(){
     dispatch(Network.UnlikePost(post.id)).then((res) => {
       setUserLiked(false);
+      setNumOfNotes(numOfNotes - 1);
     });
   }
 
@@ -83,7 +86,7 @@ export default function PostCard({ post }) {
 
         <Card.Footer className="text-muted d-flex justify-content-between align-items-center">
           <div className="d-flex justify-content-start">
-            <div className="mr-3"># notes</div>
+            <div className="mr-3">{ numOfNotes } notes</div>
             <Cursor className="mr-3" size={20} />
             <Chat className="mr-3" size={20} />
             <ArrowRepeat className="mr-3" size={20} />

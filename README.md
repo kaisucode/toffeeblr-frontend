@@ -19,14 +19,15 @@ Made with React and React Bootstrap
 - [x] New post
 - [x] View other blogs [router pass params](https://stackoverflow.com/questions/45898789/react-router-pass-param-to-component)
 - [x] Follow button in navbar
+- [x] Likes
+- [x] Display number of notes
 - [ ] Determine which ones are two-way follows for the followers list
 - [ ] Refresh on new post creation
 - [ ] Account ( Likes / follow list / settings / posts & reblogs / followers list )
-- [x] Likes
-- [ ] Display number of notes
-- [ ] Tags
+- [ ] Refresh feed and explore page each time their nav buttons are clicked
 - [ ] Comments
 - [ ] Reblogs
+- [ ] Tags
 
 - [x] Apply login on signup
 - [x] Auth state numbers
